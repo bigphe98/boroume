@@ -33,10 +33,37 @@ class BoroumeController extends BaseController {
 
     public function home(){
 
-        $this->set_common_data('UXWD Potluck', 'Welcome at my potluck demo site','Who\'s cooking tonight ?' );
+        $this->set_common_data('Boroume', 'Welcome at the Boroume demo site','Let\'s save some food today ?' );
         $this->data['content'] = 'Here comes content';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('Home');
+
+        return view('template', $this->data);
+    }
+
+    public function announcements(){
+        $this->set_common_data('Boroume', 'Announcements','' );
+        $this->data['content'] = 'Here comes content';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('Announcements');
+
+        return view('template', $this->data);
+    }
+
+    public function savingfood(){
+        $this->set_common_data('Boroume', 'Save Food','Start saving food' );
+        $this->data['content'] = 'Here comes content';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('Save Food');
+
+        return view('template', $this->data);
+    }
+
+    public function events(){
+        $this->set_common_data('Boroume', 'Events','Check the calender for upcoming events' );
+        $this->data['content'] = 'Here comes content';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('Upcoming Events');
 
         return view('template', $this->data);
     }

@@ -12,10 +12,9 @@ class Menu_model
     {
         $this->menu_items = array(
             array('name' => 'Home', 'title' => 'Go Home', 'link' => 'home','classname' => 'active'),
-            array('name' => 'Tips', 'title' => 'Tips for the website', 'link' => 'tips','classname' => 'inactive'),
-            array('name' => 'Upcoming Events', 'title' => 'Checkout events', 'link' => 'events','classname' => 'inactive'),
-            array('name' => 'Create', 'title' => 'Start new event', 'link' => 'create','classname' => 'inactive'),
-            array('name' => 'About', 'title' => 'About this website', 'link' => 'about','classname' => 'inactive')
+            array('name' => 'Announcements', 'title' => 'Check the latest updates', 'link' => 'announcements','classname' => 'inactive'),
+            array('name' => 'Save Food', 'title' => 'Go Save Food', 'link' => 'savingfood','classname' => 'inactive'),
+            array('name' => 'Upcoming Events', 'title' => 'Checkout events', 'link' => 'events','classname' => 'inactive')
         );
     }
 

@@ -3,12 +3,13 @@
 <head>
     <title><?= $title?></title>
     <meta charset="UTF-8" />
-    <meta name="keywords" content="UXWD course demo" />
+    <meta name="keywords" content="boroume demo site" />
     <meta name="description"
-          content="This a demo for the UXWD course. But still... the question is... who will cook tonight?" />
+          content="This a demo site for Boroume" />
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/public/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/css/boroume.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="/public/favicon.ico"/>
 
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
@@ -19,8 +20,8 @@
 <body>
 <header>
     <div id="logo">
-        <h1>PotLuck</h1>
-        <h2>UXWD demo site</h2>
+        <h1>Boroume</h1>
+        <h2>demo site</h2>
     </div>
     <nav>
         <?php if (isset($menu_items)) : ?>
@@ -44,20 +45,12 @@
     </section>
     <aside>
         <article>
-            <h3>Latest PotLuck...</h3>
-            <ul>
-
-        </article>
-        <article>
-            <h3>Feedback</h3>
-            <p>This concept is awesome! Also the site looks nice and stylish <em>(Jeroen)</em></p>
-            <p>Is there also a mobile app for this site? <em>(Patrick)</em></p>
-            <p>Student cooking with <a href="https://dagelijksekost.een.be/">Dagelijkse Kost</a>
+            <p>Official Website <a href="https://www.boroume.gr/">Boroume</a>
         </article>
     </aside>
 </main>
 <footer>
-    <p>Copyright &copy; 2020 UXWD. KUL&nbsp;All Rights Reserved.&nbsp;&nbsp;
+    <p>Copyright &copy; 2024 Thesis. KUL&nbsp;All Rights Reserved.&nbsp;&nbsp;
         <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
     </p>
 </footer>

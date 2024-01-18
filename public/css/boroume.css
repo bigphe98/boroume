@@ -4,7 +4,7 @@
 }
 
 body {
-    background: #15384C;
+    background: #EAB676;
     font-family: 'Dosis',sans-serif;
     font-size: 15px;
     color: #545454;
@@ -24,7 +24,7 @@ header {
     margin-top: 30px;
     height: 150px;
     padding: 50px;
-    background: #CF4A41;
+    background: #EAB676;
     text-transform: uppercase;
 
     display: flex;
@@ -43,7 +43,7 @@ main {
 footer {
     padding: 15px 0px; /* top+bottom left+right*/
     background: white;
-    border-top: 2px solid #000000;
+    border-top: 2px solid #EAB676;
     text-align: center;
 }
 
@@ -100,11 +100,11 @@ nav a {
     text-decoration: none;
     font-size: 14px;
     font-weight: 300;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 nav a:hover, nav .active {
-    color: #000001;
+    color: #FFFFFF;
 }
 
 section {
@@ -148,7 +148,7 @@ table, th, td {
 }
 
 .over {
-    background-color: #CF4A41;
+    background-color: #EAB676;
 }
 
 video {
