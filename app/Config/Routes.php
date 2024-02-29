@@ -19,7 +19,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
 $routes->setDefaultNamespace('App\Controllers');
 
 //FOR STUDEV
-//$routes->setDefaultController('TypwindController');
+//$routes->setDefaultController('BoroumeController');
 
 //FOR LOCALHOST
 $routes->setDefaultController('Home');
@@ -68,10 +68,10 @@ $routes->get('/', 'Home::index');
 #$routes->post('check', 'TypwindController::check', ['as' => 'check']);
 #$routes->get('logout', 'TypwindController::logout', ['as' => 'logout']);
 
-$routes->get('home', 'BoroumeController::home');
-$routes->get('announcements', 'BoroumeController::announcements');
-$routes->get('savingfood', 'BoroumeController::savingfood');
-$routes->get('events', 'BoroumeController::events');
+#$routes->get('home', 'BoroumeController::home');
+#$routes->get('announcements', 'BoroumeController::announcements');
+#$routes->get('savingfood', 'BoroumeController::savingfood');
+#$routes->get('calendar', 'BoroumeController::calendar');
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';

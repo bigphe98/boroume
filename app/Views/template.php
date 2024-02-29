@@ -8,8 +8,8 @@
           content="This a demo site for Boroume" />
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/public/css/boroume.css" rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" type="image/png" href="/public/favicon.ico"/>
+    <link href="<?=base_url()?>/public/css/boroume.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="<?=base_url()?>/public/favicon.ico"/>
 
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>

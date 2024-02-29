@@ -14,7 +14,7 @@ class Menu_model
             array('name' => 'Home', 'title' => 'Go Home', 'link' => 'home','classname' => 'active'),
             array('name' => 'Announcements', 'title' => 'Check the latest updates', 'link' => 'announcements','classname' => 'inactive'),
             array('name' => 'Save Food', 'title' => 'Go Save Food', 'link' => 'savingfood','classname' => 'inactive'),
-            array('name' => 'Upcoming Events', 'title' => 'Checkout events', 'link' => 'events','classname' => 'inactive')
+            array('name' => 'Calendar', 'title' => 'Checkout calendar', 'link' => 'calendar','classname' => 'inactive')
         );
     }
 

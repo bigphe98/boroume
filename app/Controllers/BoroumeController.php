@@ -59,11 +59,11 @@ class BoroumeController extends BaseController {
         return view('template', $this->data);
     }
 
-    public function events(){
-        $this->set_common_data('Boroume', 'Events','Check the calender for upcoming events' );
+    public function calendar(){
+        $this->set_common_data('Boroume', 'Calendar','Check the calender');
         $this->data['content'] = 'Here comes content';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('Upcoming Events');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('Calendar');
 
         return view('template', $this->data);
     }
