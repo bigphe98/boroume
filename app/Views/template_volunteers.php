@@ -20,9 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <script src="<?= base_url()?>/public/js/peopleManagement.js"></script>
-    <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-    <script src="<?= base_url()?>/public/js/<?=$script?>" defer></script>
-    <?php endforeach; ?>
+    <script src="<?= base_url()?>/public/js/general.js"></script>
 </head>
 
 <body>
@@ -39,7 +37,7 @@
                         <?php if (isset($menu_items)) : ?>
                             <ul>
                                 <?php foreach ($menu_items as $menu): ?>
-                                    <li style="width: 300px; margin-right: 15px;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
+                                    <li style="width: 500px; margin-right: 15px; white-space: nowrap;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
@@ -47,18 +45,26 @@
                 </div>
                 <div class="col-md-2">
                     <div class="langs">
-                        <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/en'); ?>">English</a>
-                        <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/gr'); ?>">Ελληνικά</a>
+                        <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/volunteers/lang/en'); ?>">English</a>
+                        <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/volunteers/lang/gr'); ?>">Ελληνικά</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 <main>
+    <div id="shop-nav-wrapper" class="row">
+        <ul id="shop-navlinks" class="col-md-12">
+            <?php foreach ($volunteer_menu_items as $menu): ?>
+                <li><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class="<?=$menu['classname']?>"><?=$menu['name']?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
     <section>
         <h2><?= $content_title_1?></h2>
         <h3><?= $content_title_2?></h3>
-        <p>
+        <p style="overflow-y: auto">
             <?= $content?>
 
         </p>

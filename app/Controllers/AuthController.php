@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Temp_User_Model;
 use App\Models\UserModel;
 use App\Models\Database_Model;
 use App\Libraries\Hash;
@@ -14,10 +15,16 @@ class AuthController extends BoroumeController
     public function __construct()
     {
         $this->database=new \App\Models\Database_Model();
+
+        if (!session('lang')) {
+            // Manually set the session language to English
+            $session = \Config\Services::session();
+            $session->set('lang', 'gr');
+        }
     }
 
     public function login(){
-        $this->data['pageTitle'] = 'Login';
+        $this->data['title'] = 'Login';
 
         $this->data['content'] = view("login");
         return view("login_template", $this->data);
@@ -29,10 +36,13 @@ class AuthController extends BoroumeController
         if (isset($_POST['destination'])) {
             $destination = $_POST['destination'];
 
+            // Debugging statement
+            error_log("Destination received: " . $destination);
+
             // Redirect to the appropriate controller/action
-            if ($destination === "signin") {
+            if ($destination === lang("Text.SignIn")) {
                 return redirect()->to('AuthController/SignIn');
-            } elseif ($destination === "signup") {
+            } elseif ($destination === lang("Text.SignUp")) {
                 return redirect()->to('AuthController/SignUp');
             }
         }
@@ -42,16 +52,17 @@ class AuthController extends BoroumeController
     }
 
 
+
     public function SignIn()
     {
-        $this->data['pageTitle'] = 'Sign In';
+        $this->data['title'] = 'Sign In';
         $this->data['content'] = view("SignIn");
         return view("login_template", $this->data);
     }
 
     public function SignUp()
     {
-        $this->data['pageTitle'] = 'Sign Up';
+        $this->data['title'] = 'Sign Up';
         $this->data['content'] = view("SignUp");
         return view("login_template", $this->data);
     }
@@ -115,27 +126,44 @@ class AuthController extends BoroumeController
             $lastName = $this->request->getPost('surname');
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
+            $telephone = $this->request->getPost('telephoneNumber');
+            $location = $this->request->getPost('location');
 
-
-
-
-            $result = $this->database->make_account($email, $password, $firstName, $lastName);
+            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location);
             if ($result == 0) {
                 return redirect()->to('AuthController/SignUp')->with('fail', 'Something went wrong');
             } else {
-                return redirect()->to('AuthController/SignIn')->with('success', 'You successfully registered!');
+                $emailTo = $this->request->getPost('email');
+                $subject = "Welcome to Boroume";
+                $body = "Welcome to Boroume". "\r\n";
+                $body .= $firstName;
+                $body .= ". Please sign read, fill in, sign these forms and send them back. We will check your documents and open your account.";
+
+
+                $email = \Config\Services::email();
+                $email->setFrom('typwindcontroller@gmail.com', 'Boroume Org');
+                $email->setTo($this->request->getPost('email'));
+
+                $email->setSubject($subject);
+                $email->setMessage($body);
+
+                $email->attach('public/pdfs/Μπορούμε στη Λαϊκή_Οδηγός εθελοντών_review 2023.pdf');
+                $email->attach('public/pdfs/Οδηγός Εθελοντή_Γενικές αρχές.pdf');
+                $email->attach('public/pdfs/Σύμβαση Παροχής Εθελοντικής Εργασίας ΜΠΟΡΟΥΜΕ_2023 (1).pdf');
+                if ($email->send()) {
+                    return redirect()->to('AuthController/SignIn')->with('success', 'You successfully registered! Check your email address.');
+                }else{
+                        return  redirect()->to('AuthController/SignIn')->with('fail', 'Something went wrong.');
+                    }
             }
         }
-
-
-
-        }
+    }
 
 
     public function check_login(){
 
         $userModel = new UserModel();
-        $table_name=$userModel->getTableName();
+        $table_name = $userModel->getTableName();
         $validation = $this->validate([
                 'email' => [
                     'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.peopleEmailAddress]',
@@ -174,6 +202,9 @@ class AuthController extends BoroumeController
                 return  redirect()->to('AuthController/SignIn')->with('fail', 'Incorrect password.')->withInput();
 
             }else{
+                if (!$userModel->isFromOrganization($email)) {
+                    return redirect()->to('BoroumeController/home');
+                }
                 $session_data = ['user' => $user_info];
                 $session_data_json = json_encode($session_data);
                     $expiry = time() + (60 * 60 * 24);
@@ -189,7 +220,11 @@ class AuthController extends BoroumeController
                     setcookie('LoggedUser', $session_data_json, $options);
                     //if above does not work use below
                     //setcookie('LoggedUser', $session_data_json, $expiry,'/');
+                if (!$userModel->isFromOrganization($email)) {
                     return redirect()->to('BoroumeController/home');
+                }else{
+                    return redirect()->to('BoroumeController/volunteers');
+                }
 
             }
         }
@@ -220,8 +255,7 @@ class AuthController extends BoroumeController
     public function recoverPassword(){
         $userModel = new UserModel();
         $table_name = $userModel->getTableName();
-        if($_COOKIE['lang'] == "en"){
-            $validation = $this->validate([
+        $validation = $this->validate([
                 'email' => [
                     'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.email]',
                     'errors' => [
@@ -230,32 +264,7 @@ class AuthController extends BoroumeController
                         'is_not_unique' => 'Email is not registered in our server.',
                     ],
                 ]
-            ]);
-        }
-        if($_COOKIE['lang'] == "en"){
-            $validation = $this->validate([
-                'email' => [
-                    'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.email]',
-                    'errors' => [
-                        'required' => 'Email is required.',
-                        'valid_email' => 'Please check the Email field. It does not appear to be valid.',
-                        'is_not_unique' => 'Email is not registered in our server.',
-                    ],
-                ]
-            ]);
-        }
-        if($_COOKIE['lang'] == "nl"){
-            $validation = $this->validate([
-                'email' => [
-                    'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.email]',
-                    'errors' => [
-                        'required' => 'E-mail is verplicht.',
-                        'valid_email' => 'E-mailadres is niet geldig.',
-                        'is_not_unique' => 'E-mailadres is niet gekend.',
-                    ],
-                ]
-            ]);
-        }
+        ]);
 
 
         if($validation){
@@ -293,11 +302,14 @@ class AuthController extends BoroumeController
 
         }
 
-
-
-
-        $this->data['pageTitle'] = 'Recover Password';
+        $this->data['title'] = 'Recover Password';
         $this->data['content'] = view("auth/forgotPassword");
         return view("auth/login_template", $this->data);
+    }
+
+    function codeOfConduct(){
+        $this->data['title'] = 'Code Of Conduct';
+        $this->data['content'] = view("code_of_conduct");
+        return view("login_template", $this->data);
     }
 }

@@ -6,15 +6,15 @@ class Menu_model
 {
 
     private $menu_items;
-
+    private $lang;
 
     public function __construct()
     {
+
         $this->menu_items = array(
-            array('name' => 'Home', 'title' => 'Go Home', 'link' => 'home','classname' => 'active'),
-            array('name' => 'Announcements', 'title' => 'Check the latest updates', 'link' => 'announcements','classname' => 'inactive'),
-            array('name' => 'Save Food', 'title' => 'Go Save Food', 'link' => 'savingfood','classname' => 'inactive'),
-            array('name' => 'Calendar', 'title' => 'Checkout calendar', 'link' => 'calendar','classname' => 'inactive')
+            array('name' => lang('Text.HomeText'), 'title' => 'Go Home', 'link' => 'home','classname' => 'active'),
+            array('name' => lang('Text.AnnouncementsText'), 'title' => 'Check the latest updates', 'link' => 'announcements','classname' => 'inactive'),
+            array('name' => lang('Text.CalendarText'), 'title' => 'Checkout calendar', 'link' => 'calendar','classname' => 'inactive')
         );
     }
 

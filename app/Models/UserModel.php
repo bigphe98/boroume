@@ -18,13 +18,22 @@ class UserModel extends Model
         parent::__construct();
         $this->table = 'people';
         $this->primaryKey = 'peopleId';
-        $this->allowedFields = ['peopleEmailAddress', 'peoplePassword' , 'peopleTelephoneNumber', 'peopleFirstName', 'peopleLastName','peopleLocation'];
+        $this->allowedFields = ['peopleEmailAddress', 'peoplePassword' , 'peopleTelephoneNumber', 'peopleFirstName', 'peopleLastName','peopleLocation', 'peopleIsVolunteer', 'peopleIsOrganisation'];
 
 
     }
 
     public function getTableName(){
         return $this->table;
+    }
+
+    public function isFromOrganization($email)
+    {
+        $user = $this->where('peopleEmailAddress', $email)->first();
+        if ($user && $user['peopleIsOrganisation'] == 1) {
+            return true;
+        }
+        return false;
     }
 
 }

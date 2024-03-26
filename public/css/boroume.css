@@ -15,10 +15,54 @@
     --darkOrange: #EB6F31;
 }
 
+html{
+    overflow-y: hidden;
+}
+
+#scrollable1{
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+li{
+    margin-outside: 10px;
+}
+
+button{
+    background: var(--darkBlue);
+    border:0;
+    color: var(--whiteFigma);
+    cursor: pointer;
+    box-shadow: inset 0 0 5px -1px var(--mediumGrey);
+}
+
+.secondaryButton{
+    border:0;
+    color: var(--darkBlue);
+    cursor: pointer;
+    box-shadow: inset 0 0 5px -1px var(--mediumGrey);
+}
+
 .textbutton{
     border-radius: 15px;
-    font-family: 'Viga', sans-serif;
+    font-family: 'Nokora', sans-serif;
     font-size: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-color 0.2s;
+    background: #063970;
+
+}
+
+.textbuttonsmall{
+    border-radius: 10px;
+    font-family: 'Viga', sans-serif;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     transition: background-color 0.2s;
@@ -26,11 +70,30 @@
 
 .secondarytextbutton{
     border-radius: 15px;
-    font-family: 'Viga', sans-serif;
+    font-family: 'Nokora', sans-serif;
     font-size: 30px;
     padding-left: 10px;
     padding-right: 10px;
     transition: background-color 0.2s;
+    background-color: var(--darkestBlue);
+    color: var(--whiteFigma);
+}
+
+.roundbutton{
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    box-shadow: inset 0 0 5px -5px var(--mediumGrey);
+    transition: background-color 0.2s;
+}
+.smallroundbutton{
+    width: 32px;
+    height: 32px;
+    border-radius: 25px;
+    box-shadow: inset 0 0 2px -2px var(--mediumGrey);
+    transition: background-color 0.2s;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 * {
@@ -40,7 +103,7 @@
 
 body {
     background: #EAB676;
-    font-family: 'Nokora', bold;
+    font-family: 'Canada', bold;
     font-size: 15px;
     color: #545454;
 
@@ -204,6 +267,19 @@ canvas, #svg {
     border: thin solid silver;
 }
 
+.menu-list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-list li {
+    margin-right: 15px;
+}
+
+.menu-list li a {
+    white-space: nowrap; /* Prevent text from wrapping */
+}
 
 [id^=showPswd], [id^=hidePswd]{
     position: absolute;
@@ -223,6 +299,9 @@ canvas, #svg {
     height: 64px;
     display: flex;
     box-sizing: border-box
+}
+#navigations{
+    margin-left: 15px;
 }
 
 /*LOGO IN NAVIGATION BAR*/
@@ -265,7 +344,105 @@ canvas, #svg {
 
 #langs_login{
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     padding: 0px;
+}
+
+#logo-icon{
+    width: 158px;
+    height: auto;
+    margin-top: -44px;
+    margin-left: -35px;
+}
+
+#logo-wrapper{
+    position: absolute;
+    left: 6px
+}
+
+.peopleCard{
+    width: clamp(500px, 100%, 1200px);
+}
+
+.nonexpanded{
+    padding-top: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
+    margin-top: 10px;
+    border-color: var(--lightGrey);
+    border-style: groove;
+    border-width: 1px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 15px;
+}
+
+
+/*Search bar*
+
+ */
+
+.mainPageSearch{
+    margin-top: 15px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: var(--whiteFigma);
+    border-radius: 60px;
+    transition: 0.5s;
+    box-shadow: 0 0 0 5px var(--backgroundColor);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.mainPageSearch.active{
+    width: 300px;
+
+}
+
+.mainPageSearch .mainPageSearchIcon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--darkBlue);
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    margin-right: 200px;
+}
+
+.mainPageSearch .mainPageSearchIcon::before{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid var(--whiteFigma);
+    border-radius: 50%;
+    transform: translate(-3px, -3px);
+}
+
+.mainPageSearch .mainPageSearchIcon::after{
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 12px;
+    background: var(--whiteFigma);
+    transform: translate(6px, 6px) rotate(315deg);
+}
+
+.mainPageSearch.input{
+    position: relative;
+    width: 300px;
+    height: 60px;
+    left: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
 }

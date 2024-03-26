@@ -1,34 +1,30 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= $title?></title>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="boroume demo site" />
+    <meta name="description"
+          content="This a demo site for Boroume" />
 
-    <title>Login</title>
-
-    <link rel="shortcut icon" type="image/png" href="<?=base_url()?>/public/favicon.ico"/>
-
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
-
-    <link href="<?=base_url()?>/public/layoutit/src/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?=base_url()?>/public/css/boroume.css" rel="stylesheet" type="text/css"/>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,600;8..144,700;8..144,800&family=Viga&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="<?=base_url()?>/public/layoutit/src/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="<?=base_url()?>/public/favicon.ico"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/jquery.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/scripts.js"></script>
-    <script src="<?=base_url()?>/public/js/general.js"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+    <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
+        <script src="<?= base_url()?>/public/js/<?=$script?>" defer></script>
+    <?php endforeach; ?>
 </head>
 <body>
 <header>
@@ -36,25 +32,20 @@
         <div id="navbar" class="row">
             <div id="logo-div" class="col-md-1">
                 <div id="logo-top">
-                    <div id="keyboard-wrapper">
-
+                    <div id="logo-wrapper">
+                        <img id="logo-icon" style="margin-top: 20px;" src="<?=base_url()?>/public/icons/png-boroume_logo_gr.png" alt="website logo">
                     </div>
-                    <div id="logo-text-top-wrapper">
-                        <h5 id="logo-text-top">BOROUME</h5>
-                    </div>
-
                 </div>
 
             </div>
 
-            <div class="offset-8"></div>
-            <div id = "langs_login" class="col-md-3">
+            <div class="col-md-9"></div>
+            <div id="langs_login" class="col-md-2">
                 <div class="langs">
-                    <a href="#" class="language" lang="en" style="font-family: 'Nokora', sans-serif">English</a>
-                    <a href="#" class="language active" lang="nl" style="font-family: 'Nokora', sans-serif">Ελληνικά</a>
+                    <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('AuthController/login/lang/en'); ?>">English</a>
+                    <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('AuthController/login/lang/gr'); ?>">Ελληνικά</a>
                 </div>
             </div>
-
         </div>
     </div>
 </header>

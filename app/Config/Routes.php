@@ -19,10 +19,10 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
 $routes->setDefaultNamespace('App\Controllers');
 
 //FOR STUDEV
-//$routes->setDefaultController('BoroumeController');
+$routes->setDefaultController('BoroumeController');
 
 //FOR LOCALHOST
-$routes->setDefaultController('Home');
+//$routes->setDefaultController('Home');
 
 $routes->setDefaultMethod('home');
 $routes->setTranslateURIDashes(false);
@@ -46,7 +46,12 @@ $routes->setAutoRoute(true);
 //$routes->get('/', 'AuthController::login');
 //
 //FOR LOCALHOST
-$routes->get('/', 'Home::index');
+$routes->get('/', 'BoroumeController::index');
+
+$routes->get('AuthController/login/lang/(:any)', 'LanguageController::switchLanguage/$1');
+$routes->get('BoroumeController/home/lang/(:any)', 'LanguageController::switchLanguage/$1');
+$routes->get('BoroumeController/volunteers/lang/(:any)', 'LanguageController::switchLanguage/$1');
+
 
 /*
  * --------------------------------------------------------------------

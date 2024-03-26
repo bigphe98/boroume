@@ -17,9 +17,9 @@ class App extends BaseConfig
      *    http://example.com/
      */
     //FOR STUDEV
-//    public $baseURL = 'https://a23phaedonlomis.studev.groept.be/';
+    public string $baseURL = 'https://a23phaedonlomis.studev.groept.be/';
     //FOR LOCALHOST
-    public string $baseURL = 'http://localhost/';
+   //public string $baseURL = 'http://localhost/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -84,7 +84,7 @@ class App extends BaseConfig
      *
      * If false, no automatic detection will be performed.
      */
-    public bool $negotiateLocale = false;
+    public bool $negotiateLocale = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -99,7 +99,7 @@ class App extends BaseConfig
      *
      * @var string[]
      */
-    public array $supportedLocales = ['en'];
+    public array $supportedLocales = ['gr', 'en'];
 
     /**
      * --------------------------------------------------------------------------
