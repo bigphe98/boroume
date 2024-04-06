@@ -37,5 +37,181 @@ return [
     'Athens' => 'Athens',
     'Thessaloniki' => 'Thessaloniki',
     'LocationText' => 'Location',
-    'TelephoneNumberText' => 'Telephone Number'
+    'TelephoneNumberText' => 'Telephone Number',
+    'CodeOfConductTitle' => 'PRIVATE AGREEMENT FOR VOLUNTEER SERVICES',
+    'coc01' => 'In Athens, on this day of ',
+    'coc021' => ', between:',
+    'coc022' => 'On the one hand, the civil society non-profit company with the name of “Boroume Saving Food – Saving Lives”, which
+is based in Athens on Dikis street at number 10, with Taxpayer Identification Number 997890887, Athens tax office IB’
+and is legally represented for the signing of this agreement by Mr. Alexandros Theodoridis and will be referred to as
+the “Company” and on the other hand, ',
+    'coc03' => ' , ',
+    'coc04'=> ', resident of ',
+    'coc05' => '  with Taxpayer Identification Number (if applicable) of ',
+    'coc06' => '  at Tax Office (if applicable) ',
+    'coc07' => ', who will be referred to as the “Volunteer” have agreed and the following are mutually accepted: ',
+    'coc1Title' => '1. SCOPE OF SERVICES:',
+    'coc11' => '1.1 The Volunteer wishes to provide services to the Company for charitable reasons and to help and take part in The
+Company’s charitable work ("voluntary employment" within the meaning of article 13 of Law 4873/2021). The services
+the Volunteer agrees to provide are as follows: ',
+    'coc12' => '1.2 The Volunteer agrees to provide his services to the Company with free will, voluntarily and for moral reasons,
+without any financial or any material consideration today, or expect any such consideration in the future. ',
+    'coc2Title' => '2. RELATIONSHIP BETWEEN PARTIES:',
+    'coc21' => 'It is therefore expressly agreed that this agreement is not an employment contract, a contract for the provision of
+independent services or any other related employment agreement. None of the contracting parties wish to make this
+agreement a legal obligation or a legal right. It is expressly agreed that given the nature of the Volunteer&apos;s services,
+the Company is not obliged to pay any social security contributions or other compensation. ',
+    'coc3Title' => '3. TERM:',
+    'coc31' => 'The duration of this contract commences on ',
+    'coc32' => ' and it is agreed that it will last for an
+indefinite period. Since this agreement has been drawn up for reasons of moral duty and does not create legal
+obligations and legal rights, it may be terminated at any time by any of the contracting parties. The Company will
+advise the volunteer if necessary to cease the provision of services and the volunteer may at any time discontinue
+providing services to the Company by simple notification to the Company. ',
+    'coc4Title' => '4. OBLIGATIONS',
+    'coc41' => 'The Volunteer agrees to comply generally with the suggestions and instructions of the Organization, when providing
+his/her voluntary employment, avoiding any action, act or omission, which will cause or could cause damage to the
+Organization or to third parties. The Volunteer also takes care to refrain from any behavior that could call into question
+the feeling of trust of third parties towards the Organization.
+The Volunteer is bound and obliged to maintain confidentiality of all information and knowledge that is obtained while
+performing services for the Company. This obligation is of unlimited duration. Confidentiality is also extended to all
+information to which the Volunteer gains access or which came to his/her attention in any way regarding a third party or legal entity, such as associates, donors and sponsors of the Organization. In particular, the Volunteer is called upon to
+handle and preserve as confidential all information and undertakes not to disclose, use, publish, channel or in any other
+way communicate this information.
+In addition, the Volunteer acknowledges that he/she has become aware and is committed to adhering
+to the terms and instructions contained therein of the Volunteer Guide: ',
+    'coc42' => ' ',
+    'coc43' => ' “Boroume at the Farmers’ Market”',
+    'coc44' => 'The Volunteer declares responsibly that he/she has public and/or private insurance coverage for medical and hospital
+care during his/her stay in Greece at the following institution: ',
+    'coc5Title' => '5. VIDEO CONSENT AND RELEASE FORM:',
+    'coc51' => 'Without expectation of compensation or other remuneration, now or in the future, I hereby give my consent to
+BOROUME, its affiliates, agents and sponsors to use my image and likeness and/or any interview statements from me
+in its publication, promotional, advertising or other media activities (including the internet).
+The consent includes, but is not limited to:',
+    'coc52' => ' Permission to interview, film, photograph, tape, or otherwise make a video reproduction of me and/or record
+my voice',
+    'coc53' => ' Permission to use my name',
+    'coc54' => ' Permission to use quotes from the interview(s) (or excerpts of such quotes), the film, photograph(s), tape(s)
+or reproduction(s) of me, and/or recording of my voice, in part or in whole, it its publications, in newspapers,
+magazines and other print media, on television, radio and electronic media (including the Internet) and/or in
+mailings for promotional, educational and awareness.',
+    'coc55' => 'The consent is given in perpetuity, free of any claims or financial demands and does not require prior approval by me.',
+    'coc6Title' => '6. FINAL PROVISIONS:',
+    'coc61' => '6.1 This Agreement is governed by Greek law and any dispute relating to the interpretation of this Agreement is
+resolved by the courts of Athens, which are solely responsible for resolving the disputes arising out of it.',
+    'coc62' => '6.2 In accordance with applicable legislation on the protection of personal data, the Volunteer has already provided
+and in any case also provides consent to the use, processing and transmission of all personal data relating to it and
+maintained by the Company under this Voluntary Service Agreement.
+                In confirmation of the above, the agreement was signed in two (2) identical originals and each of the parties received
+one. ',
+    'cocAgreeButton' => 'I agree',
+    'hospitalisationPlaceholder' => 'fill in your medical institute (required)',
+    'residencyPlaceholder' => 'fill in your residency (required)',
+    'afmPlaceholder' => 'fill in your TIN (optional)',
+    'doyPlaceholder' => 'fill in your TO (optional)',
+    'servOnePlaceholder' => 'fill in service (required)',
+    'servPlaceholder' => 'fill in service (optional)',
+    //volunteers guide
+    'volunteersGuideTitle' => 'Volunteers Guide',
+    'volunteersGuideSubtitle' => 'Boroume at the Farmers’ Market',
+    'vg0_0bold' => 'Objective: ',
+    'vg0_0' => 'Saving &offering suitable for human consumption fruits, vegetables or other food that is left over at the end of working day at a farmers ‘market',
+    'vg0_1bold' => 'Duration of activity: ',
+    'vg0_1' => '1-2 hours (depending on the size of the farmers’ market)',
+    'vg0_2bold' => 'What you will need to participate in an action: ',
+    'vg0_2' => 'Comfortable clothes and shoes, an orange Boroume vest, a supermarket shopping cart (the last two provided by Boroume)',
+    'vg1Title' => 'Volunteers',
+    'vg1_1' => 'It is absolutely essential that the volunteer send the volunteer agreement, fully completed and signed by hand, to Boroume before taking part in the first action
+It is recommended that only volunteers over the age of 12 take part in actions. For volunteers who are minors, a parent/guardian signs the volunteer agreement, which is accompanied by a parental consent form with a signature certified by a Citizen Service Center (ΚΕΠ) (or with an electronic affidavit of consent to participate, with a certified signature from gov.gr)',
+    'vg1_2' => 'It is recommended that only volunteers over the age of 12 take part in actions. For volunteers who are minors, a parent/guardian signs the volunteer agreement, which is accompanied by a parental consent form with a signature certified by a Citizen Service Center (ΚΕΠ) (or with an electronic affidavit of consent to participate, with a certified signature from gov.gr) ',
+    'vg1_3' => 'Volunteers who are minors (12-15 years of age) are accompanied by an adult family member, who has full responsibility for the volunteer. Volunteers aged 16-18 are accompanied by either by an adult family member or by the coordinator of the action, upon relevant consultation with Boroume.',
+    'vg1_4' => 'For minors to volunteer in actions of the “Boroume in the Farmers’ Market” program, it is absolutely essential that Boroume has been informed before the action and given its consent. ',
+    'vg2Title' => 'Activity Steps',
+    'vg2_11' => 'Initially, an experienced volunteer is designated as the ',
+    'vg2_1bold' => 'coordinator',
+    'vg2_12' => 'of the activity. The coordinator takes care of group coordination, vest handling, receiving and returning the supermarket shopping carts, receiving the list of food items gathered and updating Boroume about the activity when it is completed.',
+    'vg2_21' => 'The coordinator separates the volunteers in ',
+    'vg2_2bold' => 'teams',
+    'vg2_22' => ' and assigns each team a part of the farmers’ market.',
+    'vg2_31' => 'The teams take their supermarket carts and they go to the assigned part of the farmers’ market so they can ',
+    'vg2_3bold' => 'pick up the fruits and vegetables',
+    'vg2_32'=> ' that are offered to them by the sellers.',
+    'vg2_41' => 'When a cart is full, volunteers ',
+    'vg2_4bold' => 'take the cart',
+    'vg2_42' => ' to the predetermined collection area and return to the activity.',
+    'vg2_51' => 'At the collection point, the representative of the charity in cooperation with the team makes the initial sorting of the products, ',
+    'vg2_5bold' => 'discreetly separating',
+    'vg2_52' => 'only those that can’t be used in any way for human consumption.',
+    'vg2_61' => 'The ',
+    'vg2_6bold' => 'recording of products',
+    'vg2_62' => 'gathered is undertaken by one of the volunteers or the representative of the charity or the entire team each time a cart is emptied. The method by which the list is prepared is agreed prior the beginning of the activity after consulting with the coordinator of the activity.',
+    'vg3Title' => 'Useful suggestions',
+    'vg3_11' => 'During the activity ',
+    'vg3_1bold1' => 'we smile, we are polite and we are patient',
+    'vg3_12' => ' even in situations where we are confronted with caution or distrust. We are always ',
+    'vg3_1bold2' => 'polite',
+    'vg3_13' => 'to our fellow people and we behave with respect and understanding. We are doing this activity for a good cause and our objective isto increase public awareness without confrontation.',
+    'vg3_2bold1' => 'Our objective',
+    'vg3_21' => 'is to reduce food waste and offer food to those in need. We really want producers and sellers to sell all their products.',
+    'vg3_2bold2' => 'Our role is to collect anything that unfortunately is left unsold and is fit for human consumption.',
+    'vg3_31' => 'Αs long as we can avoid it, we prefer not to use ',
+    'vg3_3bold1' => 'plastic bags',
+    'vg3_32' => ', rather we use ',
+    'vg3_3bold2' => 'paper cartons',
+    'vg3_33' => ' often found on the sidewalks of the market. We especially avoid using black garbage bags.',
+    'vg3_4' => 'While we are collecting the donated products, ',
+    'vg3_4bold' => 'we are not concerned by their shape, size or color but only if they can be used for human consumption (cooking, storage).',
+    'vg3_51' => 'We',
+    'vg3_5bold' => 'take whatever',
+    'vg3_52' => 'is offered at the time it is offered because if the volunteers leave the donation for later the seller may have left the market by then. If we do not have the ability to pick up at that time (because e.g. our cart is full), we put the food in boxes and arrange with the seller (or someone next to him or a volunteer from our team) to attend it until we return for the pickup.',
+    'vg3_61' => 'If a seller informs us that they have ',
+    'vg3_6bold' => 'some food they wish to donate later',
+    'vg3_62' => 'we remember to go back and collect the donation.',
+    'vg3_71' => 'If the team is not sure that ',
+    'vg3_7bold' => 'the items offered are suitable for delivery',
+    'vg3_72' => ' to the charity, they shall receive them and consult the representative of the charity at the collection point. Products deemed unsuitable are not included in the recording list.',
+    'vg3_8' => 'All activities start and end at the ',
+    'vg3_8bold' => ' initial meeting point.',
+    'vg3_91' => 'The ',
+    'vg3_9bold' => 'recording of the list of donated products',
+    'vg3_92' => 'is done either in the number of boxes/crates offered or in number of bags(supermarket size). If the food isin different packaging (i.e. very large bags or small crates), then we record the quantity in such a way that it approximates the quantity in boxes or supermarket bags (i.e. 1,5 bags instead of 1 large bag or 1 box instead of 3 small crates).',
+    'vg3_101' => 'We make sure we arrive',
+    'vg3_10bold' => 'on time',
+    'vg3_102' => ' for our activity.',
+    'vg3_11bold' => 'In the event we need to leave earlier than the set time',
+    'vg3_111' => 'for the end of the activity, we inform the coordinator of the activity.',
+    'vg3_12bold' => 'If our plans change',
+    'vg3_121' => ' and we are not able to take part in the activity, we inform Boroume as soon as possible before the activity starts.',
+    'vg4Title' => 'SOS – IMPORTANT THINGS TO ALWAYS KEEP IN MIND:',
+    'vg4_11' => 'We ',
+    'vg4_1bold' => 'never',
+    'vg4_12' => ' handle the cart alone while transporting collected food but only with the assistance of other fellow volunteers',
+    'vg4_21' => 'We ',
+    'vg4_2bold' => 'never',
+    'vg4_22' => 'let the cart with the collected food unattended or parked somewhere far from us',
+    'vg4_31' => 'We are ',
+    'vg4_3bold' => 'extremely cautious',
+    'vg4_32' => ' while handling the cart in order to avoid in any way personal or third person injury or causing any property damage (food stall damage, food products, other vehicles etc.)',
+    'vg4_41' => 'The use of the Boroume vest throughout the action is ',
+    'vg4_4bold' => 'obligatory',
+    'vg4_51' => 'We are ',
+    'vg4_5bold' => 'extremely cautious concerning other moving vehicles',
+    'vg4_52' => ' in the market during the activity (i.e. sellers’ vans)',
+    'vg4_6' =>'We do not smoke, consume alcohol, we do not eat any of the products that are donated, we do not leave donated products unattended in the street',
+    'vg5Title'  => 'What to do in the event this happens..',
+    'vg5_1bold' => 'A seller or a customer asks you where the food goes: ',
+    'vg5_1' => 'Let them know the name of the charity that is being supported by the activity. If someone has any doubts about the information we can invite them to accompany us to the vehicle where they can meet the charity’s representative.',
+    'vg5_2bold' => 'A seller or a customer attempts to start a conversation about politics, religion or other similar topic: ',
+    'vg5_2' => 'With a positive attitude and a smile, we respond by telling them that we are focused on our work which is to support people in need of food. We thank them for their views and continue our work.',
+    'vg5_3bold' => 'A seller asks whether the food that is donated supports Greeks: ',
+    'vg5_3' => 'With a smile we tell the seller that the donated food goes to the charity with which we are collaborating and that the charity supports people that are facing food insecurity without regard to religion, race etc. ',
+    'vg5_4bold' => 'A seller or a customer expresses distrust toward our work: ',
+    'vg5_4' => 'With a smile and a positive attitude, we give them information, ask them to go to our website for details regarding our work or urge them to contact us for more details. We thank them for their views and continue our work. ',
+    'vg5_5bold' => 'A person in need asks us for some of the food at the time that it is being donated by a seller: ',
+    'vg5_5' => 'We ask the seller for permission to give part of his donation to the person. If the seller refuses, we accept his wish (there are times when the sellers know the specific person and whether they have a need or are trying to use our activity as a way to get free food from the market) ',
+    'vg5_6bold' => 'A person in need asks us for some of the food during the activity: ',
+    'vg5_6' => 'We politely inform them that the food we collect supports a charity in the area that provides food to people in need and refer them to a charity for support',
+    'vgEndButton' => 'Back',
+
 ];

@@ -1,97 +1,195 @@
 <div class="container">
-<h1>ΙΔΙΩΤΙΚΟ ΣΥΜΦΩΝΗΤΙΚΟ ΠΑΡΟΧΗΣ ΕΘΕΛΟΝΤΙΚΗΣ ΕΡΓΑΣΙΑΣ</h1>
-    <form action="submit.php" method="post">
+<h1><?= lang("Text.CodeOfConductTitle")?></h1>
+    <form action="<?= base_url()?>AuthController/confirmCodeOfConduct" method="POST" autocomplete="off">
 
-        <div>Στην Αθήνα σήμερα στις <input type="date" id="start" name="trip-start" min="2023-01-01" max="2060-12-31">
-            , μεταξύ:
-            Αφενός της αστικής μη κερδοσκοπικής εταιρείας με την επωνυμία «ΜΠΟΡΟΥΜΕ Saving Food – Saving Lives», η οποία
-            εδρεύει στην Αθήνα επί της οδού Δίκης αρ. 10, ΑΦΜ 997890887, ΔΟΥ ΙΒ’ Αθηνών και εκπροσωπείται νόμιμα για την
-            υπογραφή της παρούσας σύμβασης από τον κύριο Αλέξανδρο Θεοδωρίδη και ο οποίος στην συνέχεια θα καλείται η
-            «Οργάνωση» και Αφετέρου του/της <input type="text" id="volunteer" name="volunteer" placeholder="όνομα">,του <input type="text" id="volunteerSurname" name="volunteerSurname" placeholder="επόμημο">, κατοίκου
-            <input type="text" id="volunteerPlace" name="volunteerPlace" placeholder="έδρα">με ΑΦΜ
-            <input type="text" id="volunteerAFM" name="volunteerAFM" placeholder="ΑΦΜ"> ΔΟΥ <input type="text" id="volunteerDOY" name="volunteerDOY" placeholder="ΔΟΥ">, ο οποίος στη συνέχεια θα καλείται ο «Εθελοντής»
-        </div>
-        <h3>1. ΑΝΤΙΚΕΙΜΕΝΟ ΥΠΗΡΕΣΙΩΝ:</h3>
-        <div>
-            1.1 Ο Εθελοντής επιθυμεί να παρέχει τις υπηρεσίες του στην Οργάνωση για φιλανθρωπικούς σκοπούς, προκειμένου
-            να βοηθήσει και να συμβάλλει στο φιλανθρωπικό της έργο («εθελοντική απασχόληση» κατά την έννοια του άρθρου
-            13 Ν. 4873/2021). Οι υπηρεσίες που συμφωνεί να παρέχει συνίστανται ενδεικτικά στις ακόλουθες:
-        </div>
-        <div>
-            1.2 Ο Εθελοντής συμφωνεί ότι θα παρέχει τις υπηρεσίες του στην Οργάνωση με την ελεύθερη βούληση του,
-            εθελοντικά και για λόγους ηθικού καθήκοντος, χωρίς οιοδήποτε οικονομικό ή άλλο υλικό αντάλλαγμα σήμερα, ούτε
-            όμως και προσδοκά οιοδήποτε τέτοιο αντάλλαγμα στο μέλλον.
-        </div>
-        <h3>2. ΣΧΕΣΗ ΜΕΤΑΞΥ ΤΩΝ ΜΕΡΩΝ:</h3>
-        <div>Κατά συνέπεια ρητά συμφωνείται ότι το παρόν συμφωνητικό δεν αποτελεί σύμβαση εξαρτημένης εργασίας, ούτε
-            σύμβαση παροχής ανεξαρτήτων υπηρεσιών, ούτε οιασδήποτε άλλης συναφούς φύσης συμφωνία για παροχή
-            εργασίας. Κανένα από τα συμβαλλόμενα μέρη δεν επιθυμεί να παράγει η παρούσα σύμβαση οποιαδήποτε νομική
-            υποχρέωση ή νομικό δικαίωμα. Ρητά συμφωνείται ότι δεδομένης της φύσης των υπηρεσιών του Εθελοντή η Οργάνωση
-            δεν υποχρεούται σε καταβολή οιωνδήποτε ασφαλιστικών εισφορών ή άλλου είδους αποζημίωση.</div>
-        <h3>3. ΔΙΑΡΚΕΙΑ:</h3>
-        <div>Η διάρκεια της παρούσας σύμβασης αρχίζει την <input type="date" id="startVolunteeringDate" name="trip-start" min="2023-01-01" max="2060-12-31"> και συμφωνείται αορίστου χρόνου.
-            Δεδομένου ότι η παρούσα σύμβαση έχει καταρτισθεί δυνάμει λόγων ηθικού καθήκοντος και δεν παράγει νομικές
-            υποχρεώσεις και νομικά δικαιώματα, δύναται να λυθεί οποτεδήποτε από οποιοδήποτε από τα συμβαλλόμενα μέρη.
-            Η Οργάνωση θα ενημερώσει τον Εθελοντή όταν απαιτηθεί να παύσει την παροχή των υπηρεσιών του και ο Εθελοντής
-            δύναται οποτεδήποτε να διακόψει την παροχή των υπηρεσιών του προς την Οργάνωση με απλή γνωστοποίηση της
-            πρόθεσής του αυτής προς την Οργάνωση.</div>
-        <h3>4. ΥΠΟΧΡΕΩΣΕΙΣ</h3>
-        <div>Ο Εθελοντής δεσμεύεται να συμμορφώνεται εν γένει με τις υποδείξεις και τις οδηγίες της Οργάνωσης, κατά την παροχή
-            της εθελοντικής του απασχόλησης, αποφεύγοντας οιαδήποτε ενέργεια, πράξη ή παράλειψη, η οποία θα προκαλέσει ή
-            θα μπορούσε να προκαλέσει ζημία στην Οργάνωση ή σε τρίτους.
-            Φροντίζει, επίσης, να απέχει από κάθε συμπεριφορά, η οποία θα μπορούσε να θέσει υπό αμφισβήτηση το αίσθημα
-            εμπιστοσύνης τρίτων έναντι της Οργάνωσης.
-            Ο Εθελοντής υποχρεούται να τηρεί εχεμύθεια για όλες τις πληροφορίες που περιέρχονται σε γνώση του σχετικά με την Οργάνωση. Η εν λόγω υποχρέωση έχει απεριόριστη διάρκεια. Η τήρηση εμπιστευτικότητας εκτείνεται και σε όλες τις
-            πληροφορίες στις οποίες αποκτά πρόσβαση ο Εθελοντής ή περιήλθαν με οποιονδήποτε τρόπο στην αντίληψή του
-            σχετικά με τρίτο φυσικό ή νομικό πρόσωπο, όπως συνεργάτες, δωρητές και χορηγοί της Οργάνωσης. Ειδικότερα,
-            καλείται ο Εθελοντής να χειρίζεται και διαφυλάττει ως εμπιστευτικές όλες τις πληροφορίες και αναλαμβάνει τη
-            δέσμευση να μην αποκαλύπτει, χρησιμοποιεί, δημοσιεύει, διοχετεύει ή με οποιονδήποτε άλλο τρόπο ανακοινώνει
-            αυτές.
-            Επιπλέον, έλαβε γνώση του Οδηγού Εθελοντή και δεσμεύεται να τηρεί τους όρους και οδηγίες που περιλαμβάνονται
-            σε αυτό, και συγκεκριμένα των ακόλουθων εγγράφων.</div>
-        <div>
+        <p><?= lang("Text.coc01")?><?php
+            $currentDate = date('d-m-Y');
+            echo $currentDate;
+            ?>
+            <?= lang("Text.coc021")?>
+            <br>
+            <?= lang("Text.coc022")?>
+            <b>
+                <?php
+                if (isset($_COOKIE['LoggedUser'])){
+                    //echo $_COOKIE['LoggedUser'];
+                    $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+                    $expertName = $loggedUser['firstName'];
+                    echo $expertName;
+                }else{
+                    echo 'No First Name';
+                }?>
+            </b>
+            <?= lang("Text.coc03")?>
+            <b>
+                <?php
+                if (isset($_COOKIE['LoggedUser'])){
+                    //echo $_COOKIE['LoggedUser'];
+                    $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+                    $expertName = $loggedUser['lastName'];
+                    echo $expertName;
+                }else{
+                    echo 'No Last Name';
+                }?>
+            </b>
+            <?= lang("Text.coc04")?>
+            <input type="text" id="volunteerPlace" name="volunteerPlace" placeholder="<?= lang('Text.residencyPlaceholder')?>">
+            <?php if(session()->has('validation')): ?>
+                <small class="text-danger"><?= display_error(session('validation'), 'volunteerPlace') ?></small>
+            <?php endif ?>
+            <?= lang("Text.coc05")?>
+            <?= lang("Text.coc04")?>
+            <input type="text" id="volunteerAFM" name="volunteerAFM" placeholder="<?= lang('Text.afmPlaceholder')?>">
+            <?php if(session()->has('validation')): ?>
+                <small class="text-danger"><?= display_error(session('validation'), 'volunteerAFM') ?></small>
+            <?php endif ?>
+            <?= lang("Text.coc06")?>
+            <input type="text" id="volunteerDOY" name="volunteerDOY" placeholder="<?= lang('Text.doyPlaceholder')?>">
+            <?php if(session()->has('validation')): ?>
+                <small class="text-danger"><?= display_error(session('validation'), 'volunteerDOY') ?></small>
+            <?php endif ?>
+            <?= lang("Text.coc07")?>
+        </p>
+        <h3><?= lang("Text.coc1Title")?></h3>
+
+            <p>
+                <?= lang("Text.coc11")?>
+                <div style="margin-left: 20px;">
+                    <?php if(session()->has('validation')): ?>
+                        <small class="text-danger"><?= display_error(session('validation'), 'serviceOne') ?></small>
+                    <?php endif ?>
+                    <li>
+                        <input style="margin-bottom: 10px;" type="text" id="firstService" name="firstService" placeholder="<?= lang('Text.servOnePlaceholder')?>">
+                    </li>
+                    <li>
+                        <input style="margin-bottom: 10px;" type="text" id="secondService" name="secondService" placeholder="<?= lang('Text.servPlaceholder')?>">
+                    </li>
+                    <li>
+                        <input style="margin-bottom: 10px;" type="text" id="thirdService" name="thirdService" placeholder="<?= lang('Text.servPlaceholder')?>">
+                    </li>
+            <!--div style="display: flex">
+                <label for="farmersMarket">
+                    <input type="checkbox" id="farmersMarket" name="farmers_Market" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-the-farmers-market/">Boroume at the Farmers Market</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="saveNFoodOffering">
+                    <input type="checkbox" id="saveNFoodOffering" name="save_food_offering" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/saving-offering-food/">Saving & Offering Food</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="everyMealMatters">
+                    <input type="checkbox" id="everyMealMatters" name="every_meal_matters" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/awareness-program-stop-food-waste/">Awareness Program "Every meal matters"</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="boroumeAtSchool">
+                    <input type="checkbox" id="boroumeAtSchool" name="boroume_at_school" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-school/">Boroume At School"</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="boroumeGleaning">
+                    <input type="checkbox" id="boroumeGleaning" name="boroume_gleaning" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-gleaning/">Boroume Gleaning"</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="weAreFamily">
+                    <input type="checkbox" id="weAreFamily" name="we_are_family" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/we-are-family/">We Are Family"</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="certificationSchemeNoFoodWaste">
+                    <input type="checkbox" id="certificationSchemeNoFoodWaste" name="certification_scheme_no_food_waste" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/shima-pistopoiisis-no-food-waste/">Certification Scheme No Food Waste</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="euPrograms">
+                    <input type="checkbox" id="euPrograms" name="eu_programs" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/european-programs/">European Programs</a>
+                </label>
+            </div>
+            <div style="display: flex">
+                <label for="allianceFoodWasteInGreece">
+                    <input type="checkbox" id="allianceFoodWasteInGreece" name="alliance_food_waste_in_greece" value="1">
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/alliance-for-the-reduction-of-food-waste-ingreece/">Alliance for the Reduction of Food Waste</a>
+                </label>
+            </div-->
+                    <!--button class="textbuttonsmall" style="background: white; color: blue" onclick="addService()">
+                        Boroume At the Farmers Market <span>+</span>
+                    </button>
+            <button class="textbuttonsmall" style="background: white; " onclick="addService()">
+                Saving & Offering Food  <span>+</span>
+            </button>
+            <button class="textbuttonsmall" style="background: white" onclick="addService()">
+                Boroume at School <span>+</span>
+            </button>
+            <button class="textbuttonsmall" style="background: white" onclick="addService()">
+                Awareness Program "Every meal matters"  <span>+</span>
+            </button-->
+                </div>
+            </p>
+            <p>
+                <?= lang("Text.coc12")?>
+            </p>
+        <h3><?= lang("Text.coc2Title")?></h3>
+        <p><?= lang("Text.coc21")?></p>
+        <h3><?= lang("Text.coc3Title")?></h3>
+        <p><?= lang("Text.coc31")?>
+            <?php
+            $currentDate = date('d-m-Y');
+            echo $currentDate;
+            ?>
+            <?= lang("Text.coc32")?></p>
+        <h3><?= lang("Text.coc4Title")?></h3>
+        <p><?= lang("Text.coc41")?></p>
+        <div id="code_of_conduct_div" style="margin: 15px;">
             <label for="code_of_conduct">
-                <input type="checkbox" id="code_of_conduct" name="code_of_conduct" value="1"> «Οδηγός εθελοντών» (Γενικά)
+                <li id="code_of_conduct">
+                    <a href="<?=base_url()?>AuthController/VolunteersGuideGeneral"><?= lang("Text.coc42")?></a></li>
             </label>
-            <small class="text-danger"><?= isset($validation) ? display_error($validation, 'code_of_conduct') : '' ?></small>
         </div>
 
-        <div>
+        <div style="margin: 15px;">
             <label for="terms_of_service">
-                <input type="checkbox" id="terms_of_service" name="terms_of_service" value="1"> Οδηγός εθελοντή «Μπορούμε στη Λαϊκή»
+                <li id="terms_of_service">
+                    <a href="<?=base_url()?>AuthController/VolunteersGuide"><?= lang("Text.coc43")?></a> </li>
             </label>
-            <small class="text-danger"><?= isset($validation) ? display_error($validation, 'terms_of_service') : '' ?></small>
         </div>
-        <div>Ο Εθελοντής δηλώνει υπεύθυνα ότι διαθέτει δημόσια ή/και ιδιωτική ασφαλιστική κάλυψη για ιατροφαρμακευτική και
-            νοσοκομειακή περίθαλψη στον ακόλουθο φορέα <input type="text" id="volunteerHospitalisation" name="volunteerHospitalisation" placeholder="φορέας"></div>
-        <h3>5. ΣΥΝΑΙΝΕΣΗ ΧΡΗΣΗΣ ΟΠΤΙΚΟΑΚΟΥΣΤΙΚΟΥ ΥΛΙΚΟΥ:</h3>
-        <div>Με το παρόν ο εθελοντής δίνει τη συγκατάθεση του στην Οργάνωση, τους συνεργάτες της και τους δωρητές της να
-            χρησιμοποιούν την εικόνα του εθελοντή, όπως αυτή αποτυπώνεται σε video ή φωτογραφικό υλικό, καθώς και
-            δηλώσεις του αποτυπωμένες με ηχητικό ή/και ηλεκτρονικό τρόπο, για προωθητικούς και διαφημιστικούς σκοπούς
-            (συμπεριλαμβανομένου και του διαδικτύου), χωρίς καμία προσδοκία αποζημίωσης ή άλλης χρηματικής καταβολής.
-            Η συναίνεση περιλαμβάνει αλλά δεν περιορίζεται σε:
-            <ul> Συγκατάθεση μαγνητοσκόπησης της εικόνας του εθελοντή και μαγνητοφώνησης της φωνής του με
-            ηλεκτρονικά μέσα</ul>
-            <ul>Συγκατάθεση να χρησιμοποιείται το όνομα του</ul>
-            <ul> Συγκατάθεση να χρησιμοποιούνται αποσπάσματα από συνεντεύξεις (ή μέρη αυτών των αποσπασμάτων),
-            οπτικού υλικού (video ή φωτογραφικού) ή/και ηχογραφήσεις της φωνής του, αποσπασματικά ή εν συνόλω σε
-            δημοσιεύσεις σε εφημερίδες, περιοδικά και άλλα έντυπα, στην τηλεόραση και τα λοιπά ηλεκτρονικά μέσα
-            (συμπεριλαμβανομένου και του διαδικτύου) και σε ηλεκτρονικές αποστολές για προωθητικούς και
-            εκπαιδευτικούς λόγους καθώς και ευαισθητοποίησης του κοινού.</ul>
-            Η συναίνεση αυτή δίδεται επ’ αόριστο, ελεύθερη από οποιαδήποτε απαίτηση, οικονομική ή άλλη, χωρίς να χρειάζεται
-            στο εξής περαιτέρω έγκριση από τον εθελοντή.</div>
-        <h3>6. ΤΕΛΙΚΕΣ ΔΙΑΤΑΞΕΙΣ:</h3>
-        <div>6.1 Η παρούσα σύμβαση διέπεται από το Ελληνικό δίκαιο και κάθε αμφισβήτηση σχετική με την ερμηνεία του
-            παρόντος λύεται από τα δικαστήρια της Αθήνας, τα οποία είναι και αποκλειστικώς αρμόδια για την επίλυση των
-            διαφορών που θα προκύψουν από αυτό.
-            6.2 Σύμφωνα με την ισχύουσα νομοθεσία περί προστασίας των δεδομένων προσωπικού χαρακτήρα, ο Εθελοντής έχει
-            ήδη παράσχει και σε κάθε περίπτωση παρέχει και με την παρούσα την συγκατάθεσή του για τη χρήση, επεξεργασία
-            και διαβίβαση όλων των κάθε είδους προσωπικών δεδομένων που τον αφορούν και τηρούνται από την Οργάνωση στo
-            πλαίσιο της παρούσας σύμβασης εθελοντικής εργασίας.
-            Σε επιβεβαίωση των ανωτέρω η Σύμβαση υπεγράφη σε δύο (2) όμοια πρωτότυπα και κάθε ένας από τους
-            συμβαλλομένους έλαβε από ένα.</div>
+        <p><?= lang("Text.coc44")?>
+            <input type="text" id="volunteerHospitalisation" name="volunteerHospitalisation" placeholder="<?= lang("Text.hospitalisationPlaceholder")?>">
+            <?php if(session()->has('validation')): ?>
+                <small class="text-danger"><?= display_error(session('validation'), 'volunteerHosp') ?></small>
+            <?php endif ?>
+        </p>
+        <h3><?= lang("Text.coc5Title")?></h3>
+        <p><?= lang("Text.coc51")?>
+        <div style="margin-left: 15px; margin-bottom: 10px;">
+            <li><?= lang("Text.coc52")?></li>
+            <li><?= lang("Text.coc53")?></li>
+            <li><?= lang("Text.coc54")?></li>
+        </div>
+        <?= lang("Text.coc55")?>
+        </p>
+        <h3><?= lang("Text.coc6Title")?></h3>
+        <div><p><?= lang("Text.coc61")?></p>
+            <p><?= lang("Text.coc62")?></p>
+            </div>
         <br><br>
         <!-- Other fields go here -->
-        <input type="submit" value="Submit">
+        <div class="row justify-content-center" id="create-account-div">
+            <div  class="row justify-content-center">
+                <div style="display: flex; align-items: center; ">
+                    <input type="hidden" name="button1" value="button1">
+                    <button id="create_account_button" class="textbuttonsmall"><?= lang("Text.cocAgreeButton")?></button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>

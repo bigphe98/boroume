@@ -19,9 +19,6 @@
             </div >
             <form style="margin-top: 10px;" class="col-4" action="<?= base_url()?>AuthController/check_login" method="post" autocomplete="off"   >
 
-                    <?php $validation = \Config\Services::validation(); ?>
-
-                    <?= csrf_field(); ?>
 
                     <?php if( !empty( session()->getFlashdata('fail') ) ) : ?>
                         <div class="alert alert-danger" id="alertpopup"><?= session()->getFlashdata('fail'); ?></div>
@@ -31,22 +28,25 @@
                         <div class="alert alert-success" id="alertpopup3"><?= session()->getFlashdata('success'); ?></div>
                     <?php endif ?>
 
-                    <div class="form-group ">
 
+                    <div class="form-group ">
+                        <?php if(session()->has('validation')): ?>
+                                <small class="text-danger"><?= display_error(session('validation'), 'email') ?></small>
+                        <?php endif ?>
                         <div style="display: flex; align-items: center;">
                             <label for="emailSignIn" style="width: 100px"> <?= lang("Text.EmailText")?> </label>
-                            <input id="emailSignIn" type="text" style="font-family: 'Canada', sans-serif; width: 300px" name="email" class="form-control" placeholder="<?= lang("Text.EmailText")?>" value="" autocomplete="off">
-                            <small class="text-danger" style="margin-left: 10px;"><?= isset($validation) ? display_error($validation, 'email') : '' ?></small>
+                            <input id="emailSignIn" type="text" style="font-family: 'Canada', sans-serif; width: 300px" name="email" class="form-control" placeholder="<?= lang("Text.EmailText")?>" value="<?= set_value('email') ?>" autocomplete="off">
                         </div>
+
                     </div>
 
                     <div class="form-group ">
-
+                        <?php if(session()->has('validation')): ?>
+                            <small class="text-danger"><?= display_error(session('validation'), 'password') ?></small>
+                        <?php endif ?>
                         <div style="display: flex; align-items: center; ">
                             <label for="passwordSignIn" style="width: 100px"> <?= lang("Text.PasswordText")?> </label>
-                            <input id="passwordSignIn" style="font-family: 'Canada', sans-serif; width: 300px" type="password" name="password" class="form-control" placeholder="<?= lang("Text.PasswordText")?>" value="" autocomplete="off">
-
-                            <small class="text-danger" style="margin-left: 10px;"><?= isset($validation) ? display_error($validation, 'password') : '' ?></small>
+                            <input id="passwordSignIn" style="font-family: 'Canada', sans-serif; width: 300px" type="password" name="password" class="form-control" placeholder="<?= lang("Text.PasswordText")?>" value="<?= set_value('password') ?>" autocomplete="off">
                             <span class="material-symbols-outlined" id="showPswd10" style="display: block; cursor: pointer; left: 330px" onclick="togglePassword(document.getElementById('passwordSignIn'), document.getElementById('showPswd10'), document.getElementById('hidePswd10'))">
     visibility
 </span>

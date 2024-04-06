@@ -29,4 +29,9 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    public $aliases = [
+        // Other aliases...
+        'error' => CodeIgniter\Debug\Exceptions::class,
+    ];
 }

@@ -14,17 +14,17 @@
     <link href="<?=base_url()?>/public/layoutit/src/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="<?=base_url()?>/public/favicon.ico"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="<?= base_url()?>/public/js/codeOfConduct.js"></script>
+    <script src="<?= base_url()?>/public/js/general.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/jquery.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/scripts.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-
-    <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/public/js/<?=$script?>" defer></script>
-    <?php endforeach; ?>
 </head>
 <body>
 <header>
@@ -42,8 +42,8 @@
             <div class="col-md-9"></div>
             <div id="langs_login" class="col-md-2">
                 <div class="langs">
-                    <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('AuthController/login/lang/en'); ?>">English</a>
-                    <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('AuthController/login/lang/gr'); ?>">Ελληνικά</a>
+                    <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" id="en" href="<?= site_url('AuthController/login/lang/en'); ?>">English</a>
+                    <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" id="gr" href="<?= site_url('AuthController/login/lang/gr'); ?>">Ελληνικά</a>
                 </div>
             </div>
         </div>

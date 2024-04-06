@@ -18,10 +18,10 @@ class Database_Model
         return $query->getRow()->result;
     }
 
-    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location){
-        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
+    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $firstService, $secondService, $thirdService, $medicalInstitute){
+        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
 
-        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location));
+        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location, $residentOf, $AFM, $DOY, $firstService, $secondService, $thirdService, $medicalInstitute));
         return $query->getRow()->result;
     }
 

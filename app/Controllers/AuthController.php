@@ -17,7 +17,7 @@ class AuthController extends BoroumeController
         $this->database=new \App\Models\Database_Model();
 
         if (!session('lang')) {
-            // Manually set the session language to English
+            // Manually set the session language to Greek
             $session = \Config\Services::session();
             $session->set('lang', 'gr');
         }
@@ -55,6 +55,7 @@ class AuthController extends BoroumeController
 
     public function SignIn()
     {
+
         $this->data['title'] = 'Sign In';
         $this->data['content'] = view("SignIn");
         return view("login_template", $this->data);
@@ -76,43 +77,50 @@ class AuthController extends BoroumeController
             'name' => [
                 'rules' => 'required|alpha|min_length[2]|regex_match[/^[A-Z][a-zA-Z]*$/]',
                 'errors' => [
-                    'required' => 'First name is required',
-                    'alpha' => 'First name should be only letters',
-                    'min_length' => 'First name should be minimum 2 characters long',
-                    'regex_match' => 'First letter should be uppercase',
+                    'required' => lang('Validation.Required'),
+                    'alpha' => lang('Validation.alphaFirstName'),
+                    'min_length' => lang('Validation.minLengthFirstName'),
+                    'regex_match' => lang('Validation.regexUpper'),
                 ],
             ],
             'surname' => [
-                'rules' => 'required|alpha_space|min_length[3]|regex_match[/^[A-Z][a-zA-Z\s]*$/]',
+                'rules' => 'required|alpha_space|min_length[2]|regex_match[/^[A-Z][a-zA-Z\s]*$/]',
                 'errors' => [
-                    'required' => 'Last name is required',
-                    'alpha' => 'Last name should be only letters',
-                    'min_length' => 'Last name should be minimum 3 characters long',
-                    'regex_match' => 'First letter should be uppercase',
+                    'required' => lang('Validation.Required'),
+                    'alpha' => lang('Validation.alphaLastName'),
+                    'min_length' => lang('Validation.minLengthLastName'),
+                    'regex_match' => lang('Validation.regexUpper'),
                 ],
             ],
             'email' => [
                 'rules'  => 'required|valid_email|is_unique['.$table_name.'.peopleEmailAddress]',
                 'errors' => [
-                    'required' => 'Email is required',
-                    'valid_email' => 'Not a valid email format',
-                    'is_unique' => 'Email has already been taken',
+                    'required' => lang('Validation.Required'),
+                    'valid_email' => lang('Validation.validEmail'),
+                    'is_unique' => lang('Validation.uniqueEmail'),
+                ],
+            ],
+            'telephone' => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => lang('Validation.Required'),
+                    'numeric' => lang('Validation.numeric'),
                 ],
             ],
             'password' => [
                 'rules'  =>  'required|min_length[6]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
                 'errors' => [
-                    'required' => 'Password is required',
-                    'min_length' => 'Password must have at least 6 characters in length',
-                    'max_length' => 'Password must not have characters more thant 20 in length',
-                    'regex_match' => 'Password needs: 1 lowercase, 1 uppercase, 1 number',
+                    'required' => lang('Validation.Required'),
+                    'min_length' => lang('Validation.minLengthPassword'),
+                    'max_length' => lang('Validation.maxLengthPassword'),
+                    'regex_match' => lang('Validation.regexPassword'),
                 ],
             ],
             'cpassword' => [
                 'rules'  => 'matches[password]',
                 'errors' => [
-                    'required' => 'Password confirmation is required',
-                    'matches' => 'Passwords do not match',
+                    'required' => lang('Validation.Required'),
+                    'matches' => lang('Validation.matchingPassword'),
                 ],
             ],
         ]);
@@ -126,37 +134,35 @@ class AuthController extends BoroumeController
             $lastName = $this->request->getPost('surname');
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-            $telephone = $this->request->getPost('telephoneNumber');
+            $telephone = $this->request->getPost('telephone');
             $location = $this->request->getPost('location');
 
-            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location);
+            /*$result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location);
             if ($result == 0) {
                 return redirect()->to('AuthController/SignUp')->with('fail', 'Something went wrong');
-            } else {
-                $emailTo = $this->request->getPost('email');
-                $subject = "Welcome to Boroume";
-                $body = "Welcome to Boroume". "\r\n";
-                $body .= $firstName;
-                $body .= ". Please sign read, fill in, sign these forms and send them back. We will check your documents and open your account.";
+            } else {*/
+                //$user_info = $userModel->where('peopleEmailAddress', $email)->first();
+                $session_data = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password, 'telephone' => $telephone, 'location' => $location];
+                $session_data_json = json_encode($session_data);
+                $expiry = time() + (60 * 60 * 24);
+                $options = [
+                    'expires' => $expiry,
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => true,
+                    'httponly' => false,
+                    'SameSite' => 'Lax',
+                ];
 
+                setcookie('LoggedUser', $session_data_json, $options);
 
-                $email = \Config\Services::email();
-                $email->setFrom('typwindcontroller@gmail.com', 'Boroume Org');
-                $email->setTo($this->request->getPost('email'));
-
-                $email->setSubject($subject);
-                $email->setMessage($body);
-
-                $email->attach('public/pdfs/Μπορούμε στη Λαϊκή_Οδηγός εθελοντών_review 2023.pdf');
-                $email->attach('public/pdfs/Οδηγός Εθελοντή_Γενικές αρχές.pdf');
-                $email->attach('public/pdfs/Σύμβαση Παροχής Εθελοντικής Εργασίας ΜΠΟΡΟΥΜΕ_2023 (1).pdf');
-                if ($email->send()) {
-                    return redirect()->to('AuthController/SignIn')->with('success', 'You successfully registered! Check your email address.');
+                if (isset($_COOKIE['LoggedUser'])) {
+                    return redirect()->to('AuthController/CodeOfConduct');
                 }else{
-                        return  redirect()->to('AuthController/SignIn')->with('fail', 'Something went wrong.');
+                        return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
                     }
             }
-        }
+
     }
 
 
@@ -168,17 +174,15 @@ class AuthController extends BoroumeController
                 'email' => [
                     'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.peopleEmailAddress]',
                     'errors' => [
-                        'required' => 'Email is required.',
-                        'valid_email' => 'Please check the Email field. It does not appear to be valid.',
-                        'is_not_unique' => 'Email is not registered in our server.',
+                        'required' => lang('Validation.Required'),
+                        'valid_email' => lang('Validation.validEmail'),
+                        'is_not_unique' => lang('Validation.unregisteredEmail'),
                     ],
                 ],
                 'password' => [
-                    'rules'  => 'required|min_length[6]|max_length[20]',
+                    'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Password is required.',
-                        'min_length' => 'Password must have atleast 6 characters in length.',
-                        'max_length' => 'Password must not have characters more thant 20 in length.',
+                        'required' => lang('Validation.Required'),
                     ],
                 ],
             ]);
@@ -199,7 +203,7 @@ class AuthController extends BoroumeController
 
             if( $check_password!=$password ){
 
-                return  redirect()->to('AuthController/SignIn')->with('fail', 'Incorrect password.')->withInput();
+                return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.incorrectPassword'))->withInput();
 
             }else{
                 if (!$userModel->isFromOrganization($email)) {
@@ -246,10 +250,9 @@ class AuthController extends BoroumeController
         //setCookie('LoggedUser','',$expiry,'/');
         //setCookie('button1','',$expiry,'/');
         //setCookie('lang','',$expiry,'/');
-        if($_COOKIE['lang'] == "en")
-            return  redirect()->to('/public/AuthController/login')->with('fail', 'You are now logged out.');
-        if($_COOKIE['lang'] == "nl")
-            return  redirect()->to('/public/AuthController/login')->with('fail', 'Je bent nu afgemeld.');
+
+        return  redirect()->to('/public/AuthController/login')->with('fail', lang('Validation.loggedOff'));
+
     }
 
     public function recoverPassword(){
@@ -259,9 +262,9 @@ class AuthController extends BoroumeController
                 'email' => [
                     'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.email]',
                     'errors' => [
-                        'required' => 'Email is required.',
-                        'valid_email' => 'Please check the Email field. It does not appear to be valid.',
-                        'is_not_unique' => 'Email is not registered in our server.',
+                        'required' => lang('Validation.Required'),
+                        'valid_email' => lang('Validation.validEmail'),
+                        'is_not_unique' => lang('Validation.unregisteredEmail'),
                     ],
                 ]
         ]);
@@ -290,9 +293,9 @@ class AuthController extends BoroumeController
             if ($email->send()){
                 $affectedRows = $this->database->update_password_expert($new_pass, $emailTo);
                 if($affectedRows > 0 ){
-                    return redirect()->to('AuthController/SignIn')->with('success', 'The email is send succesfully!');
+                    return redirect()->to('AuthController/SignIn')->with('success', lang('Validation.emailSuccess'));
                 }else{
-                    return  redirect()->to('AuthController/SignIn')->with('fail', 'Something went wrong.');
+                    return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
                 }
 
             }else{
@@ -307,9 +310,125 @@ class AuthController extends BoroumeController
         return view("auth/login_template", $this->data);
     }
 
-    function codeOfConduct(){
+    public function codeOfConduct(){
+        $signupData = session()->getFlashdata('signup_data');
         $this->data['title'] = 'Code Of Conduct';
-        $this->data['content'] = view("code_of_conduct");
+        $this->data['content'] = view("code_of_conduct", ['signupData' => $signupData]);
+
+        return view("login_template", $this->data);
+    }
+
+    public function confirmCodeOfConduct(){
+
+        $userModel = new UserModel();
+
+        $validation = $this->validate([
+            'volunteerPlace' => [
+                'rules' => 'required|alpha|regex_match[/^[A-Z][a-zA-Z]*$/]',
+                'errors' => [
+                    'required' => lang('Validation.Required'),
+                    'alpha' => lang('Validation.alphaVolunteerPlace'),
+                    'regex_match' => lang('Validation.regexUpper'),
+                ],
+            ],
+            'volunteerAFM' => [
+                'rules'  => 'numeric',
+                'errors' => [
+                    'numeric' => lang('Validation.numeric'),
+                ],
+            ],
+            'volunteerDOY' => [
+                'rules'  => 'numeric',
+                'errors' => [
+                    'numeric' => lang('Validation.numeric'),
+                ],
+            ],
+            'serviceOne' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => lang('Validation.requiredService'),
+                ],
+            ],
+            'volunteerHosp' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => lang('Validation.Required'),
+                ],
+            ]
+        ]);
+
+
+        if(!$validation){
+            return redirect()->to('AuthController/CodeOfConduct')->with('validation', $this->validator)->withInput();
+        }else{
+            $email = $loggedUser['email'] ?? null;
+            $password = $loggedUser['password'] ?? null;
+            $firstName = $loggedUser['firstName'] ?? null;
+            $lastName = $loggedUser['lastName'] ?? null;
+            $telephone = $loggedUser['telephone'] ?? null;
+            $location = $loggedUser['location'] ?? null;
+
+            $residentOf = $this->request->getPost('volunteerPlace');
+            $AFM = $this->request->getPost('volunteerAFM');
+            $DOY = $this->request->getPost('volunteerDOY');
+            $firstService = $this->request->getPost('firstService');
+            $secondService = $this->request->getPost('secondService');
+            $thirdService = $this->request->getPost('thirdService');
+
+            $medicalInstitute = $this->request->getPost('volunteerHospitalisation');
+
+            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $firstService, $secondService, $thirdService, $medicalInstitute);
+            if ($result == 0) {
+                return redirect()->to('AuthController/SignUp')->with('fail', lang('Validation.failGeneral'));
+            } else {
+                $user_info = $userModel->where('peopleEmailAddress', $email)->first();
+                $session_data = ['user' => $user_info];
+                $session_data_json = json_encode($session_data);
+                $expiry = time() + (60 * 60 * 24);
+                $options = [
+                    'expires' => $expiry,
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => true,
+                    'httponly' => false,
+                    'SameSite' => 'Lax',
+                ];
+
+                setcookie('LoggedUser', $session_data_json, $options);
+
+                $subject = "ΝΕΟΣ ΕΘΕΛΟΝΤΗΣ";
+                $body = "Ο/Η " . "\r\n";
+                $body .= $firstName;
+                $body .= " εγήνε μέλος.";
+
+
+                $email = \Config\Services::email();
+                $email->setFrom('typwindcontroller@gmail.com', 'Boroume Org');
+                $email->setTo('plomis888@gmail.com');
+
+                $email->setSubject($subject);
+                $email->setMessage($body);
+
+                if ($email->send()) {
+                    return redirect()->to('AuthController/SignIn')->with('succes', lang('Validation.registrationSuccess'));
+                } else {
+                    return redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
+                }
+
+            }
+        }
+
+
+    }
+
+    function volunteersGuide(){
+        $this->data['title'] = 'Volunteers Guide';
+        $this->data['content'] = view("volunteersGuide");
+        return view("login_template", $this->data);
+    }
+    function volunteersGuideGeneral(){
+        $this->data['title'] = 'Volunteers Guide';
+        $this->data['content'] = view("volunteersGeneralGuide");
         return view("login_template", $this->data);
     }
 }

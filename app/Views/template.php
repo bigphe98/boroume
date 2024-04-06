@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <script src="<?= base_url()?>/public/js/peopleManagement.js"></script>
+    <script src="<?= base_url()?>/public/js/general.js"></script>
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
     <script src="<?= base_url()?>/public/js/<?=$script?>" defer></script>
     <?php endforeach; ?>
@@ -34,7 +35,7 @@
                         <img id="logo-icon" src="<?=base_url()?>/public/icons/png-boroume_logo_gr.png" alt="website logo">
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <nav id="navigations">
                         <?php if (isset($menu_items)) : ?>
                             <ul>
@@ -50,6 +51,25 @@
                         <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/en'); ?>">English</a>
                         <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/gr'); ?>">Ελληνικά</a>
                     </div>
+                </div>
+                <div class="col-md-1">
+                    <h4><?php
+                        if (isset($_COOKIE['LoggedUser'])){
+                            //echo $_COOKIE['LoggedUser'];
+                            $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+                            $expertID = $loggedUser['user']['peopleId'];
+                            //echo $expertID;
+                            $expertName = $loggedUser['user']['peopleFirstName'];
+                            echo $expertName;
+                            echo"\n";
+                            $expertLastName = $loggedUser['user']['peopleLastName'];
+                            echo $expertLastName;
+                            //echo"\n";
+                            $email = $loggedUser['user']['peopleEmailAddress'];
+                            //echo $email;
+                            //echo"\n";
+                        }
+                        ?></h4>
                 </div>
             </div>
         </div>

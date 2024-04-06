@@ -120,8 +120,7 @@ header, main, footer {
 }
 
 header {
-    margin-top: 30px;
-    height: 150px;
+    height: 130px;
     padding: 50px;
     background: #EAB676;
     text-transform: uppercase;
@@ -133,11 +132,12 @@ header {
 }
 
 main {
-    padding: 50px;
+    padding: 10px;
     background: white;
-
+    height: 600px;
     display: flex;
     flex-direction: row;
+    overflow-y: scroll;
 }
 
 footer {
@@ -445,4 +445,14 @@ canvas, #svg {
     align-items: center;
     z-index: 1000;
 
+}
+
+/*Login*/
+#WelcomeMessage{
+    margin-top: 200px;
+}
+
+.scrollable-container{
+    overflow-y: scroll; /* Enable vertical scrollbar */
+    border: 1px solid #ccc;
 }

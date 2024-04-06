@@ -8,16 +8,10 @@
     <div class="backgroundpage" id="backgroundpage">
         <div class="container" id="searchcontainer">
             <div class="row justify-content-end">
-                <div class="mainPageSearch">
-                    <span class="material-symbols-outlined">
-                    search
-                    </span>
+                <div>
                     <div class="input">
-                        <input type="text" placeholder="Search People" id="mysearch"  disabled autocomplete="off">
+                        <input type="text" placeholder="Search People" id="mysearch" oninput="search()" autocomplete="off">
                     </div>
-                    <span class="material-symbols-outlined">
-                    close
-                    </span>
                 </div>
             </div>
         </div>

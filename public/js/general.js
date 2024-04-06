@@ -23,5 +23,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-document.getElementById("start").valueAsDate = new Date();
