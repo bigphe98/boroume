@@ -24,7 +24,6 @@ class Validation extends BaseConfig
         Rules::class,
         FormatRules::class,
         FileRules::class,
-        CreditCardRules::class,
     ];
 
     /**
@@ -41,4 +40,13 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
+    /**
+     * Specifies custom validation rules.
+     *
+     * @var array
+     */
+    public array $customRules = [
+        'numeric_if_filled' => 'App\Validators\CustomValidator::numericIfFilled',
+    ];
 }

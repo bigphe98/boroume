@@ -15,7 +15,8 @@ use CodeIgniter\Config\AutoloadConfig;
  * NOTE: If you use an identical key in $psr4 or $classmap, then
  *       the values in this file will overwrite the framework's values.
  *
- * NOTE: This class is required prior to Autoloader instantiation,
+ * NOTE: This class is required prior to Autoloarm -rf vendor
+der instantiation,
  *       and does not extend BaseConfig.
  *
  * @immutable

@@ -255,22 +255,31 @@ class AuthController extends BoroumeController
 
     }
 
+    public function forgotPassword(){
+
+        $this->data['title'] = 'Recover Password';
+        $this->data['content'] = view("recoverPassword");
+        return view("login_template", $this->data);
+    }
+
     public function recoverPassword(){
         $userModel = new UserModel();
         $table_name = $userModel->getTableName();
         $validation = $this->validate([
-                'email' => [
-                    'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.email]',
-                    'errors' => [
-                        'required' => lang('Validation.Required'),
-                        'valid_email' => lang('Validation.validEmail'),
-                        'is_not_unique' => lang('Validation.unregisteredEmail'),
-                    ],
-                ]
+            'email' => [
+                'rules'  => 'required|valid_email|is_not_unique['.$table_name.'.peopleEmailAddress]',
+                'errors' => [
+                    'required' => lang('Validation.Required'),
+                    'valid_email' => lang('Validation.validEmail'),
+                    'is_not_unique' => lang('Validation.unregisteredEmail'),
+                ],
+            ]
         ]);
 
 
-        if($validation){
+        if(!$validation){
+            return redirect()->back()->withInput()->with('validation', $this->validator);
+        }else{
             $emailTo = $this->request->getPost('email');
 
             $token = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -278,20 +287,20 @@ class AuthController extends BoroumeController
             $shuffeled_token = str_shuffle($token);
             $new_pass = substr($shuffeled_token, 0, $password_length) . "A1a";
 
-            $subject = "Typwind: Wachtwoord Herstel | Password recovery";
-            $body = "Je kan inloggen met je nieuwe wachtwoord. You can log in with your new password.". "\r\n";
+            $subject = "Boroume: Password recovery | Επανέκδοση Κωδικού ";
+            $body = "You can log in with your new password. Μπορείτε να συνδεθείτε με τον καινούριο κωδικό σας". "\r\n";
             $body .= $new_pass;
 
 
             $email = \Config\Services::email();
-            $email->setFrom('typwindcontroller@gmail.com', 'Typwind Support');
+            $email->setFrom('typwindcontroller@gmail.com', 'Boroume Support');
             $email->setTo($this->request->getPost('email'));
 
             $email->setSubject($subject);
             $email->setMessage($body);
 
             if ($email->send()){
-                $affectedRows = $this->database->update_password_expert($new_pass, $emailTo);
+                $affectedRows = $this->database->update_password($new_pass, $emailTo);
                 if($affectedRows > 0 ){
                     return redirect()->to('AuthController/SignIn')->with('success', lang('Validation.emailSuccess'));
                 }else{
@@ -304,10 +313,6 @@ class AuthController extends BoroumeController
             }
 
         }
-
-        $this->data['title'] = 'Recover Password';
-        $this->data['content'] = view("auth/forgotPassword");
-        return view("auth/login_template", $this->data);
     }
 
     public function codeOfConduct(){
@@ -322,45 +327,73 @@ class AuthController extends BoroumeController
 
         $userModel = new UserModel();
 
-        $validation = $this->validate([
-            'volunteerPlace' => [
-                'rules' => 'required|alpha|regex_match[/^[A-Z][a-zA-Z]*$/]',
-                'errors' => [
-                    'required' => lang('Validation.Required'),
-                    'alpha' => lang('Validation.alphaVolunteerPlace'),
-                    'regex_match' => lang('Validation.regexUpper'),
+        $AFM = $this->request->getPost('volunteerAFM');
+        $DOY = $this->request->getPost('volunteerDOY');
+        if($AFM == NULL && $DOY == NULL){
+            $validation = $this->validate([
+                'volunteerPlace' => [
+                    'rules' => 'required|alpha|regex_match[/^[A-Z][a-zA-Z]*$/]',
+                    'errors' => [
+                        'required' => lang('Validation.Required'),
+                        'alpha' => lang('Validation.alphaVolunteerPlace'),
+                        'regex_match' => lang('Validation.regexUpper'),
+                    ],
                 ],
-            ],
-            'volunteerAFM' => [
-                'rules'  => 'numeric',
-                'errors' => [
-                    'numeric' => lang('Validation.numeric'),
+                'firstService' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('Validation.requiredService'),
+                    ],
                 ],
-            ],
-            'volunteerDOY' => [
-                'rules'  => 'numeric',
-                'errors' => [
-                    'numeric' => lang('Validation.numeric'),
+                'volunteerHosp' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('Validation.Required'),
+                    ],
+                ]
+            ]);
+        }else{
+            $validation = $this->validate([
+                'volunteerPlace' => [
+                    'rules' => 'required|alpha|regex_match[/^[A-Z][a-zA-Z]*$/]',
+                    'errors' => [
+                        'required' => lang('Validation.Required'),
+                        'alpha' => lang('Validation.alphaVolunteerPlace'),
+                        'regex_match' => lang('Validation.regexUpper'),
+                    ],
                 ],
-            ],
-            'serviceOne' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => lang('Validation.requiredService'),
+                'volunteerAFM' => [
+                    'rules'  => 'numeric',
+                    'errors' => [
+                        'numeric_if_filled' => lang('Validation.numeric'),
+                    ],
                 ],
-            ],
-            'volunteerHosp' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => lang('Validation.Required'),
+                'volunteerDOY' => [
+                    'rules'  => 'numeric',
+                    'errors' => [
+                        'numeric' => lang('Validation.numeric'),
+                    ],
                 ],
-            ]
-        ]);
+                'firstService' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('Validation.requiredService'),
+                    ],
+                ],
+                'volunteerHosp' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('Validation.Required'),
+                    ],
+                ]
+            ]);
+        }
 
 
         if(!$validation){
             return redirect()->to('AuthController/CodeOfConduct')->with('validation', $this->validator)->withInput();
         }else{
+            $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
             $email = $loggedUser['email'] ?? null;
             $password = $loggedUser['password'] ?? null;
             $firstName = $loggedUser['firstName'] ?? null;
@@ -397,9 +430,10 @@ class AuthController extends BoroumeController
                 setcookie('LoggedUser', $session_data_json, $options);
 
                 $subject = "ΝΕΟΣ ΕΘΕΛΟΝΤΗΣ";
-                $body = "Ο/Η " . "\r\n";
+                $body = "Η/Ο " . "\r\n";
                 $body .= $firstName;
-                $body .= " εγήνε μέλος.";
+                $body .= " έγινε μέλος." . "\r\n";
+                $body .= " Αυτό είναι το email της/του: " . $email;
 
 
                 $email = \Config\Services::email();
@@ -417,8 +451,6 @@ class AuthController extends BoroumeController
 
             }
         }
-
-
     }
 
     function volunteersGuide(){

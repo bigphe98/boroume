@@ -19,6 +19,9 @@
             </div >
             <form style="margin-top: 10px;" class="col-4" action="<?= base_url()?>AuthController/check_login" method="post" autocomplete="off"   >
 
+                <?php $validation = \Config\Services::validation(); ?>
+
+                <?= csrf_field(); ?>
 
                     <?php if( !empty( session()->getFlashdata('fail') ) ) : ?>
                         <div class="alert alert-danger" id="alertpopup"><?= session()->getFlashdata('fail'); ?></div>
@@ -67,7 +70,7 @@
             <div style="display: flex; align-items: center; margin-top: 10px;">
                 <input type="hidden" name="button1" value="button">
                 <p style="margin-right: 20px">
-                    <a id="forgotPassword" href="<?= base_url()?>/public/AuthController/recoverPassword"><?= lang("Text.ForgotPasswordText")?></a>
+                    <a id="forgotPassword" href="<?= base_url()?>AuthController/forgotPassword"><?= lang("Text.ForgotPasswordText")?></a>
                 </p>
                 <input type="hidden" name="button1" value="button">
                 <p>

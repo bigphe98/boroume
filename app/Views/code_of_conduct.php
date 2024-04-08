@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="height: 65vh; overflow-y: scroll;">
 <h1><?= lang("Text.CodeOfConductTitle")?></h1>
     <form action="<?= base_url()?>AuthController/confirmCodeOfConduct" method="POST" autocomplete="off">
 
@@ -33,18 +33,18 @@
                 }?>
             </b>
             <?= lang("Text.coc04")?>
-            <input type="text" id="volunteerPlace" name="volunteerPlace" placeholder="<?= lang('Text.residencyPlaceholder')?>">
+            <input type="text" id="volunteerPlace" name="volunteerPlace" placeholder="<?= lang('Text.residencyPlaceholder')?>" value="<?= set_value('volunteerPlace') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerPlace') ?></small>
             <?php endif ?>
             <?= lang("Text.coc05")?>
             <?= lang("Text.coc04")?>
-            <input type="text" id="volunteerAFM" name="volunteerAFM" placeholder="<?= lang('Text.afmPlaceholder')?>">
+            <input type="text" id="volunteerAFM" name="volunteerAFM" placeholder="<?= lang('Text.afmPlaceholder')?>" value="<?= set_value('volunteerAFM') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerAFM') ?></small>
             <?php endif ?>
             <?= lang("Text.coc06")?>
-            <input type="text" id="volunteerDOY" name="volunteerDOY" placeholder="<?= lang('Text.doyPlaceholder')?>">
+            <input type="text" id="volunteerDOY" name="volunteerDOY" placeholder="<?= lang('Text.doyPlaceholder')?>" value="<?= set_value('volunteerDOY') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerDOY') ?></small>
             <?php endif ?>
@@ -56,16 +56,16 @@
                 <?= lang("Text.coc11")?>
                 <div style="margin-left: 20px;">
                     <?php if(session()->has('validation')): ?>
-                        <small class="text-danger"><?= display_error(session('validation'), 'serviceOne') ?></small>
+                        <small class="text-danger"><?= display_error(session('validation'), 'firstService') ?></small>
                     <?php endif ?>
                     <li>
-                        <input style="margin-bottom: 10px;" type="text" id="firstService" name="firstService" placeholder="<?= lang('Text.servOnePlaceholder')?>">
+                        <input style="margin-bottom: 10px;" type="text" id="firstService" name="firstService" placeholder="<?= lang('Text.servOnePlaceholder')?>" value="<?= set_value('firstService') ?>">
                     </li>
                     <li>
-                        <input style="margin-bottom: 10px;" type="text" id="secondService" name="secondService" placeholder="<?= lang('Text.servPlaceholder')?>">
+                        <input style="margin-bottom: 10px;" type="text" id="secondService" name="secondService" placeholder="<?= lang('Text.servPlaceholder')?>" value="<?= set_value('secondService') ?>">
                     </li>
                     <li>
-                        <input style="margin-bottom: 10px;" type="text" id="thirdService" name="thirdService" placeholder="<?= lang('Text.servPlaceholder')?>">
+                        <input style="margin-bottom: 10px;" type="text" id="thirdService" name="thirdService" placeholder="<?= lang('Text.servPlaceholder')?>" value="<?= set_value('thirdService') ?>">
                     </li>
             <!--div style="display: flex">
                 <label for="farmersMarket">
@@ -163,7 +163,7 @@
             </label>
         </div>
         <p><?= lang("Text.coc44")?>
-            <input type="text" id="volunteerHospitalisation" name="volunteerHospitalisation" placeholder="<?= lang("Text.hospitalisationPlaceholder")?>">
+            <input type="text" id="volunteerHospitalisation" name="volunteerHosp" placeholder="<?= lang("Text.hospitalisationPlaceholder")?>" value="<?= set_value('volunteerHosp') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerHosp') ?></small>
             <?php endif ?>

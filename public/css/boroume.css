@@ -137,7 +137,6 @@ main {
     height: 600px;
     display: flex;
     flex-direction: row;
-    overflow-y: scroll;
 }
 
 footer {
@@ -455,4 +454,5 @@ canvas, #svg {
 .scrollable-container{
     overflow-y: scroll; /* Enable vertical scrollbar */
     border: 1px solid #ccc;
+    height: 60vh;
 }

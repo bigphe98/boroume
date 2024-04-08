@@ -44,4 +44,10 @@ class Database_Model
         $query = $this->db->query($query_text);
         return $query->getResult();
     }
+
+    public function update_password($password, $email ){
+        $query_text = 'UPDATE a23PhaedonLomis.people SET peoplePassword = ? WHERE peopleEmailAddress = ?;';
+        $this->db->query($query_text, array($password,$email));
+        return $this->db->affectedRows();
+    }
 }

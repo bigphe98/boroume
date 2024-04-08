@@ -38,6 +38,8 @@ return [
     'Thessaloniki' => 'Thessaloniki',
     'LocationText' => 'Location',
     'TelephoneNumberText' => 'Telephone Number',
+    'ProceedText' => 'Proceed',
+    //Code Of Conduct
     'CodeOfConductTitle' => 'PRIVATE AGREEMENT FOR VOLUNTEER SERVICES',
     'coc01' => 'In Athens, on this day of ',
     'coc021' => ', between:',
@@ -213,5 +215,8 @@ It is recommended that only volunteers over the age of 12 take part in actions. 
     'vg5_6bold' => 'A person in need asks us for some of the food during the activity: ',
     'vg5_6' => 'We politely inform them that the food we collect supports a charity in the area that provides food to people in need and refer them to a charity for support',
     'vgEndButton' => 'Back',
-
+    //recover password
+    'recoverPasswordTitle' => 'Password Recovery',
+    'recoverPasswordDescription' => 'Please enter your email so we can send you a new password',
+    'recoverPasswordButton' => 'Send Email'
 ];

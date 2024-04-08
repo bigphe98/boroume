@@ -50,7 +50,7 @@
     </div>
 </header>
 <main>
-    <div class="col-md-12 " id="templateMain" style="margin-top: 30px" >
+    <div class="col-md-12 " id="templateMain" style="margin-top: 15px" >
         <?=$content?>
     </div>
 </main>
@@ -61,7 +61,7 @@
         setTimeout(function(){ alertPopup.style.display = "none"; }, 3000);
     }
 
-    let alertPopup2 = document.getElementById("alertpopup2");
+    let alertPopup2 = document.getElementById("alertpopup3");
     if (alertPopup2) {
         setTimeout(function(){ alertPopup2.style.display = "none"; }, 3000);
     }

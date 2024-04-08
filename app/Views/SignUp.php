@@ -19,6 +19,9 @@
 
         <form id="SignUp-form" class="col-4" style="margin-top: 10px" action="<?= base_url()?>AuthController/create_login" method="POST" autocomplete="off" >
 
+            <?php $validation = \Config\Services::validation(); ?>
+
+            <?= csrf_field(); ?>
 
                 <?php if( !empty( session()->getFlashdata('fail') ) ) : ?>
                     <div class="alert alert-danger" id="alertpopup"><?= session()->getFlashdata('fail'); ?></div>
@@ -137,7 +140,7 @@
                 <div  class="row justify-content-center">
                     <div style="display: flex; align-items: center; ">
                         <input type="hidden" name="button1" value="button1">
-                        <button id="create_account_button" class="textbuttonsmall">Proceed</button>
+                        <button id="create_account_button" class="textbuttonsmall"><?= lang("Text.ProceedText")?></button>
                     </div>
                 </div>
             </div>
