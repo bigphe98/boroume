@@ -35,10 +35,10 @@
                         <img id="logo-icon" src="<?=base_url()?>/public/icons/png-boroume_logo_gr.png" alt="website logo">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <nav id="navigations">
                         <?php if (isset($menu_items)) : ?>
-                            <ul>
+                            <ul style="font-size: 16pt; margin: 0;">
                                 <?php foreach ($menu_items as $menu): ?>
                                     <li style="width: 300px; margin-right: 15px;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
                                 <?php endforeach; ?>
@@ -47,13 +47,17 @@
                     </nav>
                 </div>
                 <div class="col-md-2">
-                    <div class="langs">
-                        <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/en'); ?>">English</a>
-                        <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/gr'); ?>">Ελληνικά</a>
+                    <div onclick="openSideMenu()">
+                        <span class="material-symbols-outlined">account_circle</span>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <h4><?php
+            </div>
+        </div>
+        <div class="subMenuWrap" id="subMenuWrap" style="display: none;">
+            <div class="sub-menu">
+                <div class="user-info">
+                    <img  id="account-icon2" src="<?=base_url()?>/public/icons/expert_avatar.png" alt="logged expert avatar">
+                    <h2><?php
                         if (isset($_COOKIE['LoggedUser'])){
                             //echo $_COOKIE['LoggedUser'];
                             $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
@@ -69,10 +73,22 @@
                             //echo $email;
                             //echo"\n";
                         }
-                        ?></h4>
+                        ?></h2>
                 </div>
+                <hr>
+
+                <div class="langs">
+                    <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/en'); ?>">English</a>
+                    <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/gr'); ?>">Ελληνικά</a>
+                </div>
+                <a href="#" class="sub-menu-link" onclick="location.href = '<?=base_url()?>BoroumeController/edit_profile';">
+
+                    <p id="editlink" style="font-family: 'Viga', sans-serif">EDIT PROFILE</p>
+                </a>
+                <a href="#" class="sub-menu-link" onclick="location.href = '<?=base_url()?>AuthController/logout';">
+                    <p id="logoutlink" style="font-family: 'Viga', sans-serif">LOG OUT</p>
+                </a>
             </div>
-        </div>
     </header>
 <main>
     <section>

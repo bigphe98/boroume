@@ -49,23 +49,23 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="row">
-                                        <strong class="impact-text" style="font-family: 'Canada', sans-serif">Impact</strong>
+                                    <?=lang('Text.residencyText')?><abbr title="residency" style="font-family: 'Canada', sans-serif"><?=$unregistered->residentOf?></abbr>
                                 </div>
                                 <div class="row">
-                                        <abbr class="action-text" style="font-family: 'Canada', sans-serif">Actions: </abbr>
+                                    <?=lang('Text.afmText')?><abbr title="AFM/TIN" style="font-family: 'Canada', sans-serif"><?=$unregistered->AFM_TIN?></abbr>
                                 </div>
                                 <div class="row">
-                                        <abbr class="CO-text" style="font-family: 'Canada', sans-serif">CO2:</abbr>
+                                    <?=lang('Text.doyText')?><abbr title="DOY/TO" style="font-family: 'Canada', sans-serif"><?=$unregistered->DOY_TO?></abbr>
                                 </div>
                                 <div class="row">
-                                        <abbr class="kgs-text" style="font-family: 'Canada', sans-serif">KGs:</abbr>
+                                    <?=lang('Text.hospitalText')?><abbr title="medical institute" style="font-family: 'Canada', sans-serif"><?=$unregistered->medicalInstitute?></abbr>
                                 </div>
                             </div>
                             <div class="col-md-1 align-self-center">
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="roundbutton" id="deleteStudentButton1_<?=$unregistered->peopleId?>" title="approve volunteer" onclick="approvePerson(<?=$unregistered->peopleId?>, '<?=$unregistered->peopleFirstName?>', '<?=$unregistered->peopleEmailAddress?>')">
+                                        <button class="roundbutton" id="addVolunteerButton1_<?=$unregistered->peopleId?>" title="approve volunteer" onclick="approvePerson(<?=$unregistered->peopleId?>, '<?=$unregistered->peopleFirstName?>', '<?=$unregistered->peopleEmailAddress?>')">
                                             <span class="material-symbols-outlined">
                                             person_check
                                             </span>
@@ -77,9 +77,9 @@
                             <div class="col-md-1 align-self-center">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="roundbutton" id="removeStudentButton1_<?=$unregistered->peopleId?>" title="cancel volunteer" onclick="cancelPerson(<?=$unregistered->peopleId?>)">
+                                        <button class="roundbutton" id="removeVolunteerButton1_<?=$unregistered->peopleId?>" title="manage volunteer" onclick="managePerson(<?=$unregistered->peopleId?>)">
                                                 <span class="material-symbols-outlined">
-                                            person_cancel
+                                            manage_accounts
                                             </span>
                                         </button>
                                     </div>

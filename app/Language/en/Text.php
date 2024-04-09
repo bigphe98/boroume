@@ -39,6 +39,10 @@ return [
     'LocationText' => 'Location',
     'TelephoneNumberText' => 'Telephone Number',
     'ProceedText' => 'Proceed',
+    'residencyText' => 'Residence: ',
+    'afmText' => 'Taxpayer Identification Number: ',
+    'doyText' => 'Tax Office: ',
+    'hospitalText' => 'Medical Institute: ',
     //Code Of Conduct
     'CodeOfConductTitle' => 'PRIVATE AGREEMENT FOR VOLUNTEER SERVICES',
     'coc01' => 'In Athens, on this day of ',

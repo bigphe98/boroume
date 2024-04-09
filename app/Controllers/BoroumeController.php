@@ -124,7 +124,6 @@ class BoroumeController extends BaseController {
 
         }
 
-
         $this->data['content'] = view($view, $this->data2);
 
         return view('template_volunteers', $this->data);

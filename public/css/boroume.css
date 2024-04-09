@@ -92,8 +92,6 @@ button{
     border-radius: 25px;
     box-shadow: inset 0 0 2px -2px var(--mediumGrey);
     transition: background-color 0.2s;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 
 * {
@@ -445,6 +443,104 @@ canvas, #svg {
     z-index: 1000;
 
 }
+/*SUB-MENU*/
+.subMenuWrap{
+    position: absolute;
+    top: 63px;
+    right: 0%;
+    width: 320px;
+    visibility: hidden;
+    overflow: hidden;
+    background-color: var(--lightBlue);
+    /*padding-bottom: 10px;*/
+    transition: transform 0.4s, top 0.4s;
+    z-index: 2000;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+    /*
+    border-color: white;
+    border-style: solid;
+    border-width: 5px;*/
+}
+
+.opensubMenuWrap{
+
+    visibility: visible;
+}
+
+.sub-menu{
+    padding: 20px 20px 4px 20px;
+    margin: 10px;
+}
+.user-info{
+
+    display: flex;
+    align-items: center;
+}
+
+.user-info h2{
+
+    font-weight: 500;
+}
+
+.user-info img{
+
+    width: 60px;
+    /*border-radius: 50%;*/
+    margin-right: 15px;
+}
+
+.sub-menu hr{
+
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--whiteFigma);
+    margin: 15px 0 10px;
+
+}
+
+.sub-menu-link{
+
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--whiteFigma);
+    margin: 12px 0 ;
+}
+
+.sub-menu-link p{
+    width: 100%;
+    margin: 0px;
+}
+
+.sub-menu-link img{
+
+    width: 40px;
+    background-color: var(--whiteFigma);
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-link span{
+    display: flex;
+    font-size: 22px;
+    transition: transform 0.5s;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub-menu-link:hover span{
+    transform: translateX(5px);
+}
+
+.sub-menu-link:hover p{
+    font-weight: 600;
+}
+
 
 /*Login*/
 #WelcomeMessage{
@@ -455,4 +551,8 @@ canvas, #svg {
     overflow-y: scroll; /* Enable vertical scrollbar */
     border: 1px solid #ccc;
     height: 60vh;
+}
+
+[id^=removeVolunteerButton1_]{
+    background-color: var(--darkOrange);
 }

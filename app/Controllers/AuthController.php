@@ -444,7 +444,7 @@ class AuthController extends BoroumeController
                 $email->setMessage($body);
 
                 if ($email->send()) {
-                    return redirect()->to('AuthController/SignIn')->with('succes', lang('Validation.registrationSuccess'));
+                    return redirect()->to('AuthController/SignIn')->with('success', lang('Validation.registrationSuccess'));
                 } else {
                     return redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
                 }

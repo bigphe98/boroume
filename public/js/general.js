@@ -23,3 +23,23 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+function openSideMenu() {
+    let subMenuWrap = document.getElementById("subMenuWrap")
+
+    if (subMenuWrap.style.display === "none") {
+        subMenuWrap.classList.add("opensubMenuWrap")
+        subMenuWrap.style.display = "block";
+    } else {
+        closeSideMenu();
+        subMenuWrap.style.display = "none";
+    }
+    //console.log('1: ' + subMenuWrap.style.display)
+
+}
+
+function closeSideMenu(){
+    let subMenuWrap = document.getElementById("subMenuWrap")
+    subMenuWrap.classList.remove("opensubMenuWrap")
+    //subMenuWrap.style.display = "none";
+}

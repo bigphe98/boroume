@@ -13,7 +13,7 @@
                     search
                     </span>-->
                     <div class="input">
-                        <input type="text" placeholder="Search People" id="mysearch" autocomplete="off">
+                        <input type="text" placeholder="Search People" id="mysearch" oninput="search()" autocomplete="off">
                     </div>
                     <!--<span class="material-symbols-outlined" id="closeSearchVolunteers">
                     close
@@ -79,7 +79,7 @@
                             <div class="col-md-1 align-self-center">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="roundbutton" id="removeStudentButton1_<?=$registered->peopleId?>" title="cancel volunteer" onclick="cancelPerson(<?=$registered->peopleId?>)">
+                                        <button class="roundbutton" id="removeVolunteerButton1_<?=$registered->peopleId?>" title="cancel volunteer" onclick="cancelPerson(<?=$registered->peopleId?>)">
                                                 <span class="material-symbols-outlined">
                                             person_cancel
                                             </span>

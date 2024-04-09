@@ -73,7 +73,7 @@
     </header>
 <main>
     <div id="shop-nav-wrapper" class="row">
-        <ul id="shop-navlinks" class="col-md-12">
+        <ul id="shop-navlinks" class="col-md-12" style="background: orange">
             <?php foreach ($volunteer_menu_items as $menu): ?>
                 <li><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class="<?=$menu['classname']?>"><?=$menu['name']?></a></li>
             <?php endforeach; ?>
