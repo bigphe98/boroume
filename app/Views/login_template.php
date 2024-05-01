@@ -18,6 +18,7 @@
 
     <script src="<?= base_url()?>/public/js/codeOfConduct.js"></script>
     <script src="<?= base_url()?>/public/js/general.js"></script>
+    <script src="<?= base_url()?>/public/js/signUpPage.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
     <script src="<?=base_url()?>/public/layoutit/src/js/jquery.min.js"></script>
@@ -29,18 +30,13 @@
 <body>
 <header>
     <div class="container-fluid">
-        <div id="navbar" class="row">
-            <div id="logo-div" class="col-md-1">
-                <div id="logo-top">
-                    <div id="logo-wrapper">
-                        <img id="logo-icon" style="margin-top: 20px;" src="<?=base_url()?>/public/icons/png-boroume_logo_gr.png" alt="website logo">
-                    </div>
-                </div>
-
+        <div class="row" id="navbar" >
+            <div class="col-md-1" id="logo-div" >
+                <img id="logo-icon" src="<?=base_url()?>/public/icons/png-boroume_logo_gr.png" alt="website logo">
             </div>
 
             <div class="col-md-9"></div>
-            <div id="langs_login" class="col-md-2">
+            <div class="col-md-2" id="langs_login" >
                 <div class="langs">
                     <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" id="en" href="<?= site_url('AuthController/login/lang/en'); ?>">English</a>
                     <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" id="gr" href="<?= site_url('AuthController/login/lang/gr'); ?>">Ελληνικά</a>
@@ -54,16 +50,21 @@
         <?=$content?>
     </div>
 </main>
+<footer>
+    <p>Copyright &copy; 2024 Thesis. KUL&nbsp;All Rights Reserved.&nbsp;&nbsp;
+        <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a> | <?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
+    </p>
+</footer>
 
 <script>
     let alertPopup = document.getElementById("alertpopup");
     if (alertPopup) {
-        setTimeout(function(){ alertPopup.style.display = "none"; }, 3000);
+        setTimeout(function(){ alertPopup.style.display = "none"; }, 10000);
     }
 
     let alertPopup2 = document.getElementById("alertpopup3");
     if (alertPopup2) {
-        setTimeout(function(){ alertPopup2.style.display = "none"; }, 3000);
+        setTimeout(function(){ alertPopup2.style.display = "none"; }, 10000);
     }
 </script>
 

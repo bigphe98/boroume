@@ -1,3 +1,8 @@
+<?php
+// Check if the URL contains "childSignup"
+$isChildSignup = strpos(current_url(), 'childSignup') !== false;
+?>
+
 <div class="container col-md-12">
     <div class="row justify-content-center">
         <div class="col-1"></div>
@@ -13,7 +18,8 @@
         </div>
     </div>
 </div>
-<div class="container col-md-12 scrollable-container">
+
+<div class="container col-md-12 scrollable-container signUpForm" id="signUpForm">
     <div class="row justify-content-center">
         <div class="col-4"></div>
 
@@ -61,6 +67,27 @@
                         <input id="last_name" style= "font-family: 'Viga', sans-serif; width: 300px; margin-left: 10px;" type="text" name="surname" class="form-control" placeholder="<?= lang("Text.LastNameText")?> " value="<?= set_value('surname') ?>" autocomplete="off">
                     </div>
                 </div>
+            <?php if ($isChildSignup): ?>
+            <div class="form-group" id="nameKid">
+                <?php if(session()->has('validation')): ?>
+                    <small class="text-danger"><?= display_error(session('validation'), 'nameKid') ?></small>
+                <?php endif ?>
+                <div style="display: flex; align-items: center;">
+                    <label for="first_nameKid" style="width: 100px;"> <?= lang("Text.FirstNameKidText")?> </label>
+                    <input id="first_nameKid" style="font-family: 'Viga', sans-serif; width: 300px; margin-left: 10px;" type="text" name="nameKid" class="form-control" placeholder="<?= lang("Text.FirstNameKidText")?> " value="<?= set_value('nameKid') ?>" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px" id="surnameKid">
+                <?php if(session()->has('validation')): ?>
+                    <small class="text-danger"><?= display_error(session('validation'), 'surnameKid') ?></small>
+                <?php endif ?>
+                <div style="display: flex; align-items: center;">
+                    <label for="last_nameKid" style="width: 100px;"> <?= lang("Text.LastNameKidText")?>  </label>
+                    <input id="last_nameKid" style= "font-family: 'Viga', sans-serif; width: 300px; margin-left: 10px;" type="text" name="surnameKid" class="form-control" placeholder="<?= lang("Text.LastNameKidText")?> " value="<?= set_value('surnameKid') ?>" autocomplete="off">
+                </div>
+            </div>
+            <?php endif ?>
 
                 <div class="form-group">
                     <?php if(session()->has('validation')): ?>

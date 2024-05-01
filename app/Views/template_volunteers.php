@@ -43,14 +43,17 @@
                         <?php endif; ?>
                     </nav>
                 </div>
-                <div class="col-md-2">
-                    <div class="langs">
-                        <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/volunteers/lang/en'); ?>">English</a>
-                        <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/volunteers/lang/gr'); ?>">Ελληνικά</a>
+                <div class="col-md-2 subMenuIcon">
+                    <div onclick="openSideMenu()">
+                        <span class="material-symbols-outlined">account_circle</span>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <h4><?php
+            </div>
+        </div>
+        <div class="subMenuWrap" id="subMenuWrap" style="">
+            <div class="sub-menu">
+                <div class="user-info">
+                    <h2><?php
                         if (isset($_COOKIE['LoggedUser'])){
                             //echo $_COOKIE['LoggedUser'];
                             $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
@@ -66,14 +69,26 @@
                             //echo $email;
                             //echo"\n";
                         }
-                        ?></h4>
+                        ?></h2>
                 </div>
+                <hr>
+
+                <div class="langs">
+                    <a class="dropdown-item<?= session('lang') === 'en' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/en'); ?>">English</a>
+                    <a class="dropdown-item<?= session('lang') === 'gr' ? ' active' : '' ?>" href="<?= site_url('BoroumeController/home/lang/gr'); ?>">Ελληνικά</a>
+                </div>
+                <a href="#" class="sub-menu-link" onclick="location.href = '<?=base_url()?>BoroumeController/edit_profile';">
+
+                    <p id="editlink" style="font-family: 'Viga', sans-serif">EDIT PROFILE</p>
+                </a>
+                <a href="#" class="sub-menu-link" onclick="location.href = '<?=base_url()?>AuthController/logout';">
+                    <p id="logoutlink" style="font-family: 'Viga', sans-serif">LOG OUT</p>
+                </a>
             </div>
-        </div>
     </header>
 <main>
-    <div id="shop-nav-wrapper" class="row">
-        <ul id="shop-navlinks" class="col-md-12" style="background: orange">
+    <div id="volunteers-nav-wrapper" class="row">
+        <ul id="volunteers-navlinks" class="col-md-12">
             <?php foreach ($volunteer_menu_items as $menu): ?>
                 <li><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class="<?=$menu['classname']?>"><?=$menu['name']?></a></li>
             <?php endforeach; ?>
@@ -89,15 +104,10 @@
         </p>
 
     </section>
-    <aside>
-        <article>
-            <p><?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
-        </article>
-    </aside>
 </main>
 <footer>
     <p>Copyright &copy; 2024 Thesis. KUL&nbsp;All Rights Reserved.&nbsp;&nbsp;
-        <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a>
+        <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a> | <?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
     </p>
 </footer>
 </body>

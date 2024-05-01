@@ -18,11 +18,22 @@ class Database_Model
         return $query->getRow()->result;
     }
 
-    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $firstService, $secondService, $thirdService, $medicalInstitute){
-        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
+    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute){
+        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
 
-        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location, $residentOf, $AFM, $DOY, $firstService, $secondService, $thirdService, $medicalInstitute));
+        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute));
         return $query->getRow()->result;
+    }
+
+
+    public function addToProgram($peopleId, $selectedOptions)
+    {
+        $query = NULL;
+        foreach ($selectedOptions as $option) {
+            $query_text = 'CALL add_to_program(?,?);';
+            $query = $this->db->query($query_text, array($peopleId, $option));
+        }
+        return $query->getResult();
     }
 
     public function delete_temp_account($email, $password, $firstName, $lastName){

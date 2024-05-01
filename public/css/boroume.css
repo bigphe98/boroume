@@ -20,7 +20,7 @@ html{
 }
 
 #scrollable1{
-    height: 30vh;
+    height: 35vh;
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: 35px;
@@ -99,49 +99,37 @@ button{
     padding: 0;
 }
 
-body {
-    background: #EAB676;
-    font-family: 'Canada', bold;
-    font-size: 15px;
-    color: #545454;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: fit-content;
+body, html{
+    height: 120vh;
 }
 
 header, main, footer {
-    width: 1350px;
+    width: 100%;
     box-sizing: border-box;
     box-shadow: 10px 10px 10px 5px rgba(0,0,0,.2);
 }
 
 header {
-    height: 130px;
-    padding: 50px;
-    background: #EAB676;
-    text-transform: uppercase;
-    font-family: 'Nokora', bold;
-
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    height: 13vh;
+    background-color: var(--backgroundColor);
 }
 
 main {
     padding: 10px;
     background: white;
-    height: 600px;
+    height: 80vh;
     display: flex;
     flex-direction: row;
 }
 
 footer {
-    padding: 15px 0px; /* top+bottom left+right*/
     background: white;
     border-top: 2px solid #EAB676;
     text-align: center;
+    height: auto;
 }
 
 h1, h2, h3 {
@@ -197,10 +185,10 @@ nav ul {
 }
 
 nav a {
-    font-family: 'Nokora', bold;
+    font-family: 'Canada', bold;
     letter-spacing: 1px;
     text-decoration: none;
-    font-size: 14px;
+
     font-weight: 300;
     color: #000000;
 }
@@ -293,15 +281,24 @@ canvas, #svg {
 
 
 #navbar {
-    height: 64px;
     display: flex;
-    box-sizing: border-box
-}
-#navigations{
-    margin-left: 15px;
+    box-sizing: border-box;
+    text-transform: uppercase;
 }
 
-/*LOGO IN NAVIGATION BAR*/
+#navigations{
+    margin-left: 15px;
+    margin-top: 5vh;
+}
+
+/*sign up*/
+
+.signUpForm{
+
+}
+
+
+/*LOG IN NAVIGATION BAR*/
 #logo-div{
     display: flex;
     flex-direction: column;
@@ -313,16 +310,6 @@ canvas, #svg {
 
 #logo-div:hover{
     cursor: pointer;
-}
-
-#logo-top{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50%;
-    width: auto;
-    position: relative;
-
 }
 
 #logo-bottom{
@@ -347,10 +334,10 @@ canvas, #svg {
 }
 
 #logo-icon{
-    width: 158px;
+    width: 125px;
     height: auto;
-    margin-top: -44px;
-    margin-left: -35px;
+
+    margin-top: -15px;
 }
 
 #logo-wrapper{
@@ -444,14 +431,22 @@ canvas, #svg {
 
 }
 /*SUB-MENU*/
+.subMenuIcon{
+    margin-top: 5vh;
+}
+
+.subMenuIcon:hover{
+    cursor: pointer;
+}
+
 .subMenuWrap{
     position: absolute;
-    top: 63px;
-    right: 0%;
+    top: 83px;
+    right: 10.2%;
     width: 320px;
     visibility: hidden;
     overflow: hidden;
-    background-color: var(--lightBlue);
+    background-color: var(--lightOrange);
     /*padding-bottom: 10px;*/
     transition: transform 0.4s, top 0.4s;
     z-index: 2000;

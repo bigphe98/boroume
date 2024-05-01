@@ -1,5 +1,13 @@
-<div class="container" style="height: 65vh; overflow-y: scroll;">
-<h1><?= lang("Text.CodeOfConductTitle")?></h1>
+<div class="row justify-content-center">
+    <div class="col-3"></div>
+    <div class="col-6 row justify-content-left">
+        <h1><?= lang("Text.CodeOfConductTitle")?></h1>
+    </div>
+    <div class="col-3"></div>
+</div>
+<div class="row justify-content-center scrollable-container">
+    <div class="col-3"></div>
+    <div class="col-6 row justify-content-left">
     <form action="<?= base_url()?>AuthController/confirmCodeOfConduct" method="POST" autocomplete="off">
 
         <p><?= lang("Text.coc01")?><?php
@@ -33,18 +41,17 @@
                 }?>
             </b>
             <?= lang("Text.coc04")?>
-            <input type="text" id="volunteerPlace" name="volunteerPlace" placeholder="<?= lang('Text.residencyPlaceholder')?>" value="<?= set_value('volunteerPlace') ?>">
+            <input type="text" id="volunteerPlace" name="volunteerPlace" style="width: 37vh;" placeholder="<?= lang('Text.residencyPlaceholder')?>" value="<?= set_value('volunteerPlace') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerPlace') ?></small>
             <?php endif ?>
             <?= lang("Text.coc05")?>
-            <?= lang("Text.coc04")?>
-            <input type="text" id="volunteerAFM" name="volunteerAFM" placeholder="<?= lang('Text.afmPlaceholder')?>" value="<?= set_value('volunteerAFM') ?>">
+            <input type="text" id="volunteerAFM" name="volunteerAFM" style="width: 37vh;" placeholder="<?= lang('Text.afmPlaceholder')?>" value="<?= set_value('volunteerAFM') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerAFM') ?></small>
             <?php endif ?>
             <?= lang("Text.coc06")?>
-            <input type="text" id="volunteerDOY" name="volunteerDOY" placeholder="<?= lang('Text.doyPlaceholder')?>" value="<?= set_value('volunteerDOY') ?>">
+            <input type="text" id="volunteerDOY" name="volunteerDOY"  style="width: 37vh;" placeholder="<?= lang('Text.doyPlaceholder')?>" value="<?= set_value('volunteerDOY') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerDOY') ?></small>
             <?php endif ?>
@@ -56,71 +63,39 @@
                 <?= lang("Text.coc11")?>
                 <div style="margin-left: 20px;">
                     <?php if(session()->has('validation')): ?>
-                        <small class="text-danger"><?= display_error(session('validation'), 'firstService') ?></small>
+                        <small class="text-danger"><?= display_error(session('validation'), 'programs') ?></small>
                     <?php endif ?>
-                    <li>
-                        <input style="margin-bottom: 10px;" type="text" id="firstService" name="firstService" placeholder="<?= lang('Text.servOnePlaceholder')?>" value="<?= set_value('firstService') ?>">
-                    </li>
-                    <li>
-                        <input style="margin-bottom: 10px;" type="text" id="secondService" name="secondService" placeholder="<?= lang('Text.servPlaceholder')?>" value="<?= set_value('secondService') ?>">
-                    </li>
-                    <li>
-                        <input style="margin-bottom: 10px;" type="text" id="thirdService" name="thirdService" placeholder="<?= lang('Text.servPlaceholder')?>" value="<?= set_value('thirdService') ?>">
-                    </li>
-            <!--div style="display: flex">
+            <div style="display: flex">
                 <label for="farmersMarket">
-                    <input type="checkbox" id="farmersMarket" name="farmers_Market" value="1">
+                    <input type="checkbox" id="farmersMarket" name="programs[]" value="Boroume at the Farmers Market" <?= set_checkbox('programs', 'Boroume at the Farmers Market') ?>>
                     <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-the-farmers-market/">Boroume at the Farmers Market</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="saveNFoodOffering">
-                    <input type="checkbox" id="saveNFoodOffering" name="save_food_offering" value="1">
+                    <input type="checkbox" id="saveNFoodOffering" name="programs[]" value="Saving & Offering Food" <?= set_checkbox('programs', 'Saving & Offering Food') ?>>
                     <a href="https://www.boroume.gr/en/programmata/programs-detail/saving-offering-food/">Saving & Offering Food</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="everyMealMatters">
-                    <input type="checkbox" id="everyMealMatters" name="every_meal_matters" value="1">
+                    <input type="checkbox" id="everyMealMatters" name="programs[]" value='Awareness Program "Every meal matters"' <?= set_checkbox('programs', 'Awareness Program "Every meal matters"') ?>>
                     <a href="https://www.boroume.gr/en/programmata/programs-detail/awareness-program-stop-food-waste/">Awareness Program "Every meal matters"</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="boroumeAtSchool">
-                    <input type="checkbox" id="boroumeAtSchool" name="boroume_at_school" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-school/">Boroume At School"</a>
+                    <input type="checkbox" id="boroumeAtSchool" name="programs[]" value="Boroume At School" <?= set_checkbox('programs', 'Boroume At School') ?>>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-school/">Boroume At School</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="boroumeGleaning">
-                    <input type="checkbox" id="boroumeGleaning" name="boroume_gleaning" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-gleaning/">Boroume Gleaning"</a>
+                    <input type="checkbox" id="boroumeGleaning" name="programs[]" value="Boroume Gleaning" <?= set_checkbox('programs', 'Boroume Gleaning') ?>>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-gleaning/">Boroume Gleaning</a>
                 </label>
             </div>
-            <div style="display: flex">
-                <label for="weAreFamily">
-                    <input type="checkbox" id="weAreFamily" name="we_are_family" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/we-are-family/">We Are Family"</a>
-                </label>
-            </div>
-            <div style="display: flex">
-                <label for="certificationSchemeNoFoodWaste">
-                    <input type="checkbox" id="certificationSchemeNoFoodWaste" name="certification_scheme_no_food_waste" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/shima-pistopoiisis-no-food-waste/">Certification Scheme No Food Waste</a>
-                </label>
-            </div>
-            <div style="display: flex">
-                <label for="euPrograms">
-                    <input type="checkbox" id="euPrograms" name="eu_programs" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/european-programs/">European Programs</a>
-                </label>
-            </div>
-            <div style="display: flex">
-                <label for="allianceFoodWasteInGreece">
-                    <input type="checkbox" id="allianceFoodWasteInGreece" name="alliance_food_waste_in_greece" value="1">
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/alliance-for-the-reduction-of-food-waste-ingreece/">Alliance for the Reduction of Food Waste</a>
-                </label>
-            </div-->
+
                     <!--button class="textbuttonsmall" style="background: white; color: blue" onclick="addService()">
                         Boroume At the Farmers Market <span>+</span>
                     </button>
@@ -163,7 +138,7 @@
             </label>
         </div>
         <p><?= lang("Text.coc44")?>
-            <input type="text" id="volunteerHospitalisation" name="volunteerHosp" placeholder="<?= lang("Text.hospitalisationPlaceholder")?>" value="<?= set_value('volunteerHosp') ?>">
+            <input type="text" id="volunteerHospitalisation" name="volunteerHosp" style="width: 37vh;" placeholder="<?= lang("Text.hospitalisationPlaceholder")?>" value="<?= set_value('volunteerHosp') ?>">
             <?php if(session()->has('validation')): ?>
                 <small class="text-danger"><?= display_error(session('validation'), 'volunteerHosp') ?></small>
             <?php endif ?>
@@ -192,4 +167,6 @@
             </div>
         </div>
     </form>
+    </div>
+    <div class="col-3"></div>
 </div>

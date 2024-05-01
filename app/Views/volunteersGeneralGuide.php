@@ -1,11 +1,15 @@
-<div class="container col-md-12" style="overflow-y: scroll;">
+<div class="container col-md-12">
     <div class="row justify-content-center">
-        <div class="col-1"></div>
-        <div class="col-2">
-        </div>
+        <div class="col-3"></div>
         <div class="col-6 row justify-content-left">
             <h1>Οδηγός Εθελοντή</h1>
-            <div class="col-12"></div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row justify-content-center scrollable-container">
+        <div class="col-3"></div>
+        <div class="col-6 row justify-content-left">
+            <hr>
             <h5>Γενικές αρχές</h5>
             <p>Ο Εθελοντής παρέχει τις υπηρεσίες του στην Οργάνωση προκειμένου να συνδράμει
                 στο κοινωφελές έργο της, που αποσκοπεί στον περιορισμό της σπατάλης τροφίμων

@@ -51,6 +51,8 @@ $routes->get('/', 'BoroumeController::index');
 $routes->get('AuthController/login/lang/(:any)', 'LanguageController::switchLanguage/$1');
 $routes->get('BoroumeController/home/lang/(:any)', 'LanguageController::switchLanguage/$1');
 $routes->get('BoroumeController/volunteers/lang/(:any)', 'LanguageController::switchLanguage/$1');
+$routes->get('AuthController/SignUp/ageCheck', 'AuthController::ageCheck');
+
 
 
 /*

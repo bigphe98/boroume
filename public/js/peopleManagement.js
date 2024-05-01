@@ -60,6 +60,9 @@ function approvePerson(peopleId, peopleFirstName,peopleEmailAddress){
     ajaxRequest(peopleId, peopleFirstName,peopleEmailAddress);
 
 
+    location.reload();
+
+
 }
 
 function ajaxRequest(peopleId, peopleFirstName,peopleEmailAddress) {
@@ -70,7 +73,7 @@ function ajaxRequest(peopleId, peopleFirstName,peopleEmailAddress) {
     };
 
     $.ajax({
-        url: "../BoroumeController/pmo",
+        url: "../BoroumeController/volunteers",
         type: "POST",
         data: data,
         dataType: 'json',

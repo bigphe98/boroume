@@ -22,7 +22,10 @@ return [
     'alphaVolunteerPlace' => 'Residence should be only letters',
     'requiredService' => 'The first service is at least required to be filled in!',
     'emailSuccess' => 'The email was sent successfully',
-    'registrationSuccess' => 'Your information is currently being confirmed. Come back when you have received a confirmation email to Log In'
-
+    'registrationSuccess' => 'Your information is currently being confirmed. Come back when you have received a confirmation email to Log In',
+    'programSelection' => 'Select at least one program',
+    'regexSurname' => 'Surname should start with a capital and does only contain letters',
+    'regexName' => 'Name should start with a capital and does only contain letters',
+    'emailNotActive' => 'Your account is not activated yet. Please try again later.',
 
 ];

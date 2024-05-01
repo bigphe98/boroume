@@ -4,11 +4,13 @@ return [
     'welcome_message' => 'Welcome to the landing page of Boroume',
     'page_title' => 'Welcome Page',
     'SignIn' => 'Sign In',
-    'SignUp' => 'Sing Up',
+    'SignUp' => 'Sign Up',
     'SignInHeader' => 'Sign In To Your Account',
     'SignUpHeader' => 'Create Your Account',
     'FirstNameText' => 'First Name',
     'LastNameText' => 'Last Name',
+    'FirstNameKidText' => 'First Name Kid',
+    'LastNameKidText' => 'Last Name Kid',
     'EmailText' => 'Email',
     'PasswordText' => 'Password',
     'ConfirmPasswordText' => 'Confirm Password',
@@ -43,6 +45,9 @@ return [
     'afmText' => 'Taxpayer Identification Number: ',
     'doyText' => 'Tax Office: ',
     'hospitalText' => 'Medical Institute: ',
+    'ageCheck' => 'Are you over 18?',
+    'ageCheckYes' => 'YES',
+    'ageCheckNo' => 'NO',
     //Code Of Conduct
     'CodeOfConductTitle' => 'PRIVATE AGREEMENT FOR VOLUNTEER SERVICES',
     'coc01' => 'In Athens, on this day of ',
@@ -222,5 +227,15 @@ It is recommended that only volunteers over the age of 12 take part in actions. 
     //recover password
     'recoverPasswordTitle' => 'Password Recovery',
     'recoverPasswordDescription' => 'Please enter your email so we can send you a new password',
-    'recoverPasswordButton' => 'Send Email'
+    'recoverPasswordButton' => 'Send Email',
+    //adult Consent
+    'consentTitle' => 'Μαθητεια ανηλικου στο Μπορουμε',
+    'ac1' => 'Έχουμε ενημερωθεί για το πρόγραμμα και τους σκοπούς του ‘Μπορούμε’ και παρέχουμε ανεπιφυλάκτως με την παρούσα τη ρητή συναίνεσή μας στο αίτημα του υιού μας/κόρης μας ',
+    'ac2' => 'να μαθητεύσει εθελοντικά ο υιός μας/η κόρη μας κοντά σας και να συνδράμει στην ανάπτυξη των φιλανθρωπικών δραστηριοτήτων σας.',
+    'ac3' => 'Για τον σκοπό αυτό σας γνωρίζουμε ότι τόσο ο υιός μας/η κόρη μας ',
+    'ac4' => 'όσο και εμείς επιθυμούμε να συμμετέχει το παιδί μας στις δράσεις του προγράμματος «Μπορούμε στη Λαϊκή», όπου και αν αυτές λαμβάνουν χώρα, προκειμένου να συμβάλλει στη συλλογή των αδιάθετων φρούτων και λαχανικών από τη λαϊκή αγορά, και στην παράδοσή τους σε κοινωφελή φορέα, για χρονικό διάστημα ',
+    'ac5' => ' , ήτοι μέχρ ',
+    'ac6' => 'Λαμβανομένης υπόψη της εθελοντικής φύσεως της μαθητείας, δηλώνουμε δια της παρούσης ότι δεν διατηρούμε καμία αξίωση ή απαίτηση κατά της Εταιρείας σας για παροχή οικονομικού ή οιουδήποτε άλλου ανταλλάγματος ή/και οιαδήποτε άλλη αξίωση εν γένει και συνομολογούμε ότι δεν γεννώνται καθ’ ουδένα τρόπο δικαιώματα ή/και υποχρεώσεις εργασιακής φύσεως.',
+    'ac7' => 'Σημείωση: Απαιτείται θεώρηση του γνησίου υπογραφής σε αστυνομικό τμήμα, ΚΕΠ ή μέσω gov.gr',
+    'ac8' => 'KG LAW FIRM REF. NUM.: 2.970.33'
 ];

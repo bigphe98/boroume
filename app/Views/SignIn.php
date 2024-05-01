@@ -75,7 +75,7 @@
                 <input type="hidden" name="button1" value="button">
                 <p>
                     <?= lang("Text.NewText")?>
-                    <a id="createAccount" href="<?= base_url()?>AuthController/SignUp"><?= lang("Text.CreateAccountText")?></a>
+                    <a id="createAccount" href="<?= base_url()?>AuthController/ageCheck"><?= lang("Text.CreateAccountText")?></a>
                 </p>
             </div>
     </div>

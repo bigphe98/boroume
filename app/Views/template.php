@@ -46,17 +46,16 @@
                         <?php endif; ?>
                     </nav>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 subMenuIcon">
                     <div onclick="openSideMenu()">
                         <span class="material-symbols-outlined">account_circle</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="subMenuWrap" id="subMenuWrap" style="display: none;">
+        <div class="subMenuWrap" id="subMenuWrap" style="">
             <div class="sub-menu">
                 <div class="user-info">
-                    <img  id="account-icon2" src="<?=base_url()?>/public/icons/expert_avatar.png" alt="logged expert avatar">
                     <h2><?php
                         if (isset($_COOKIE['LoggedUser'])){
                             //echo $_COOKIE['LoggedUser'];
@@ -100,15 +99,10 @@
         </p>
 
     </section>
-    <aside>
-        <article>
-            <p><?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
-        </article>
-    </aside>
 </main>
 <footer>
     <p>Copyright &copy; 2024 Thesis. KUL&nbsp;All Rights Reserved.&nbsp;&nbsp;
-        <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a>
+        <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a> | <?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
     </p>
 </footer>
 </body>

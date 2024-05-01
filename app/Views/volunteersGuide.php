@@ -1,12 +1,15 @@
 
-<div class="container col-md-12" style="overflow-y: scroll;">
+<div class="container col-md-12">
     <div class="row justify-content-center">
-        <div class="col-1"></div>
-        <div class="col-2">
-        </div>
+        <div class="col-3"></div>
         <div class="col-6 row justify-content-left">
             <h1><?= lang("Text.volunteersGuideTitle")?></h1>
-            <hr>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row justify-content-center scrollable-container">
+        <div class="col-3"></div>
+        <div class="col-6 row justify-content-left">
             <h2><?= lang("Text.volunteersGuideSubtitle")?></h2>
             <p>
                 <b><?= lang("Text.vg0_0bold")?></b> <?= lang("Text.vg0_0")?>

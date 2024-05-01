@@ -81,7 +81,7 @@
                                     <div class="col-md-12">
                                         <button class="roundbutton" id="removeVolunteerButton1_<?=$registered->peopleId?>" title="cancel volunteer" onclick="cancelPerson(<?=$registered->peopleId?>)">
                                                 <span class="material-symbols-outlined">
-                                            person_cancel
+                                            manage_accounts
                                             </span>
                                         </button>
                                     </div>
