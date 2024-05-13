@@ -67,10 +67,9 @@ class AuthController extends BoroumeController
         $this->data['title'] = 'Sign Up';
 
         // Determine if the user is signing up as an adult or a child
-        $isAdult = ($this->request->uri->getSegment(2) === 'adultSignup');
+        $isAdult = strpos(current_url(), 'adultSignup');
 
-        // Pass the flag to the view
-        $this->data['isAdult'] = $isAdult;
+        session()->setFlashdata('isAdult', $isAdult);
 
         // Load the regular signup view
         $this->data['content'] = view("SignUp", $this->data);
@@ -83,7 +82,8 @@ class AuthController extends BoroumeController
         $userModel = new UserModel();
         $table_name=$userModel->getTableName();
 
-        $isAdult = $this->data['isAdult'] ?? false;
+        $isAdult = session()->getFlashdata('isAdult');
+
 
 
         if ($isAdult) {
@@ -168,13 +168,9 @@ class AuthController extends BoroumeController
 
                 setcookie('LoggedUser', $session_data_json, $options);
 
-                if (isset($_COOKIE['LoggedUser'])) {
 
-                    return redirect()->to('AuthController/CodeOfConduct');
+                    return redirect()->to('AuthController/privateAgreement');
 
-                }else{
-                    return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
-                }
 
             }
         } else {
@@ -273,14 +269,7 @@ class AuthController extends BoroumeController
                 ];
 
                 setcookie('LoggedUser', $session_data_json, $options);
-
-                if (isset($_COOKIE['LoggedUser'])) {
-                        return redirect()->to('AuthController/adultConsent');
-
-                }else{
-                    return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
-                }
-
+                return redirect()->to('AuthController/adultConsent');
             }
         }
 
@@ -330,9 +319,6 @@ class AuthController extends BoroumeController
                     return  redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.incorrectPassword'))->withInput();
 
                 }else{
-                    if (!$userModel->isFromOrganization($email)) {
-                        return redirect()->to('BoroumeController/home');
-                    }
                     $session_data = ['user' => $user_info];
                     $session_data_json = json_encode($session_data);
                     $expiry = time() + (60 * 60 * 24);
@@ -444,9 +430,9 @@ class AuthController extends BoroumeController
         }
     }
 
-    public function codeOfConduct(){
+    public function privateAgreement(){
         $signupData = session()->getFlashdata('signup_data');
-        $this->data['title'] = 'Code Of Conduct';
+        $this->data['title'] = 'Private Agreement';
         $this->data['content'] = view("code_of_conduct", ['signupData' => $signupData]);
 
         return view("login_template", $this->data);
@@ -521,7 +507,7 @@ class AuthController extends BoroumeController
         }
 
         if(!$validation){
-            return redirect()->to('AuthController/CodeOfConduct')->with('validation', $this->validator)->withInput();
+            return redirect()->to('AuthController/privateAgreement')->with('validation', $this->validator)->withInput();
         }else{
             $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
             $email = $loggedUser['email'] ?? null;
@@ -535,9 +521,9 @@ class AuthController extends BoroumeController
             $AFM = $this->request->getPost('volunteerAFM');
             $DOY = $this->request->getPost('volunteerDOY');
             $programs = $this->request->getPost('programs');
-            $medicalInstitute = $this->request->getPost('volunteerHospitalisation');
+            $medicalInstitute = $this->request->getPost('volunteerHosp');
 
-            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute);
+            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, NULL);
             if ($result == 0) {
                 return redirect()->to('AuthController/SignUp')->with('fail', lang('Validation.failGeneral'));
             } else {
@@ -596,18 +582,96 @@ class AuthController extends BoroumeController
         return view("login_template", $this->data);
     }
 
-    function volunteersGuide(){
-        $this->data['title'] = 'Volunteers Guide';
-        $this->data['content'] = view("volunteersGuide");
-        return view("login_template", $this->data);
-    }
-    function volunteersGuideGeneral(){
-        $this->data['title'] = 'Volunteers Guide General';
-        $this->data['content'] = view("volunteersGeneralGuide");
-        return view("login_template", $this->data);
+    public function acceptAdultConsent(){
+        $userModel = new UserModel();
+
+        $validation = $this->validate([
+            'endTerm' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => lang('Validation.Required'),
+                ],
+            ]
+        ]);
+
+        if(!$validation){
+            return redirect()->to('AuthController/adultConsent')->with('validation', $this->validator)->withInput();
+        }else {
+            $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+            $email = $loggedUser['email'] ?? null;
+            $password = $loggedUser['password'] ?? null;
+            $firstName = $loggedUser['firstNameKid'] ?? null;
+            $lastName = $loggedUser['lastNameKid'] ?? null;
+            $telephone = $loggedUser['telephone'] ?? null;
+            $location = $loggedUser['location'] ?? null;
+
+            $parentFirstName = $loggedUser['firstName'] ?? null;
+            $parentLastName = $loggedUser['lastName'] ?? null;
+
+            $endTerm = $this->request->getPost('endTerm');
+
+            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, NULL, NULL, NULL, NULL, $endTerm);
+            if ($result == 0) {
+                return redirect()->to('AuthController/SignUp')->with('fail', lang('Validation.failGeneral'));
+            } else {
+                $user_info = $userModel->where('peopleEmailAddress', $email)->first();
+                $session_data = ['user' => $user_info];
+                $session_data_json = json_encode($session_data);
+                $expiry = time() + (60 * 60 * 24);
+                $options = [
+                    'expires' => $expiry,
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => true,
+                    'httponly' => false,
+                    'SameSite' => 'Lax',
+                ];
+
+                setcookie('LoggedUser', $session_data_json, $options);
+                $peopleId = $user_info['peopleId'];
+                $result2 = $this->database->link_parent_to_account($peopleId, $parentFirstName, $parentLastName);
+                if ($result2 == 0) {
+                    return redirect()->to('AuthController/SignUp')->with('fail', lang('Validation.failGeneral'));
+                }else{
+                    $subject = "ΝΕΟΣ ΕΘΕΛΟΝΤΗΣ";
+                    $body = "Η/Ο " . "\r\n";
+                    $body .= $firstName;
+                    $body .= " έγινε μέλος." . "\r\n";
+                    $body .= " Αυτό είναι το email της/του: " . $email;
+
+
+                    $email = \Config\Services::email();
+                    $email->setFrom('typwindcontroller@gmail.com', 'Boroume Org');
+                    $email->setTo('plomis888@gmail.com');
+
+                    $email->setSubject($subject);
+                    $email->setMessage($body);
+
+                    if ($email->send()) {
+                        return redirect()->to('AuthController/SignIn')->with('success', lang('Validation.registrationSuccess'));
+                    } else {
+                        return redirect()->to('AuthController/SignIn')->with('fail', lang('Validation.failGeneral'));
+                    }
+                }
+            }
+
+
+        }
+
     }
 
-    function ageCheck(){
+    public function volunteersGuide(){
+        $this->data['title'] = 'Volunteers Guide';
+        $this->data['content'] = view("volunteersGuide");
+        return view("volunteersGuide");
+    }
+    public function volunteersGuideGeneral(){
+        $this->data['title'] = 'Volunteers Guide General';
+        $this->data['content'] = view("volunteersGeneralGuide");
+        return view("volunteersGeneralGuide");
+    }
+
+    public function ageCheck(){
         $this->data['title'] = 'Age Check';
         $this->data['content'] = view("ageCheck");
         return view("login_template", $this->data);

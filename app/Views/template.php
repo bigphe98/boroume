@@ -21,9 +21,8 @@
 
     <script src="<?= base_url()?>/public/js/peopleManagement.js"></script>
     <script src="<?= base_url()?>/public/js/general.js"></script>
-    <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-    <script src="<?= base_url()?>/public/js/<?=$script?>" defer></script>
-    <?php endforeach; ?>
+    <script src="<?= base_url()?>/public/js/calendar.js"></script>
+    <script src="<?= base_url()?>/public/js/calendarVolunteers.js"></script>
 </head>
 
 <body>
@@ -40,7 +39,7 @@
                         <?php if (isset($menu_items)) : ?>
                             <ul style="font-size: 16pt; margin: 0;">
                                 <?php foreach ($menu_items as $menu): ?>
-                                    <li style="width: 300px; margin-right: 15px;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
+                                    <li style="width: 500px; margin-right: 15px; white-space: nowrap;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
@@ -105,6 +104,19 @@
         <a href="#"><?= lang("Text.PrivacyPolicyText")?></a> | <a href="#"><?= lang("Text.TermsOfUseText")?></a> | <?= lang("Text.OfficialWebsiteText")?> <a href="https://www.boroume.gr/"><?= lang("Text.BoroumeText")?> </a>
     </p>
 </footer>
+
+    <script>
+        let alertPopup = document.getElementById("alertpopup");
+        if (alertPopup) {
+            setTimeout(function(){ alertPopup.style.display = "none"; }, 10000);
+        }
+
+        let alertPopup2 = document.getElementById("alertpopup3");
+        if (alertPopup2) {
+            setTimeout(function(){ alertPopup2.style.display = "none"; }, 10000);
+        }
+    </script>
+
 </body>
 </html>
 

@@ -35,7 +35,7 @@
                 <div class="col-md-8">
                     <nav id="navigations">
                         <?php if (isset($menu_items)) : ?>
-                            <ul>
+                            <ul style="font-size: 16pt; margin: 0;">
                                 <?php foreach ($menu_items as $menu): ?>
                                     <li style="width: 500px; margin-right: 15px; white-space: nowrap;"><a href="<?=$menu['link']?>" title="<?=$menu['title']?>" class = "<?=$menu['classname']?>"><?=$menu['name']?></a></li>
                                 <?php endforeach; ?>

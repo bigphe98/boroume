@@ -1,6 +1,9 @@
 <?php
 // Check if the URL contains "childSignup"
 $isChildSignup = strpos(current_url(), 'childSignup') !== false;
+/**
+ * @var $isAdult bool
+ */
 ?>
 
 <div class="container col-md-12">
@@ -53,7 +56,8 @@ $isChildSignup = strpos(current_url(), 'childSignup') !== false;
                         <small class="text-danger"><?= display_error(session('validation'), 'name') ?></small>
                     <?php endif ?>
                     <div style="display: flex; align-items: center;">
-                        <label for="first_name" style="width: 100px;"> <?= lang("Text.FirstNameText")?> </label>
+
+                        <label for="first_name" style="width: 100px;"> <?= lang("Text.FirstNameText")?></label>
                         <input id="first_name" style="font-family: 'Viga', sans-serif; width: 300px; margin-left: 10px;" type="text" name="name" class="form-control" placeholder="<?= lang("Text.FirstNameText")?> " value="<?= set_value('name') ?>" autocomplete="off">
                     </div>
                 </div>
@@ -190,3 +194,4 @@ $isChildSignup = strpos(current_url(), 'childSignup') !== false;
 
             </div>
     </div>
+

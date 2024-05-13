@@ -68,11 +68,107 @@ class BoroumeController extends BaseController {
         $this->set_common_data('Boroume', lang('Text.CalendarText'),'');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems(lang('Text.CalendarText'));
+        $view = 'calendarVolun';
 
-        $this->data['content'] = view('calendarOrg');
+        $this->data2['farmersMarkets'] = $this->database->get_all_farmers_markets();
 
-        return view('template', $this->data);
-    }
+        $requestData = $this->request->getPost();
+        log_message('debug', 'AJAX Request Data: ' . json_encode($requestData));
+
+        // Pass the AJAX request data to the view
+        $this->data2['requestData'] = $requestData;
+
+        $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+        $userID = $loggedUser['user']['peopleId'];
+        $this->data2['userID'] = $userID;
+
+        $emailTo = $loggedUser['user']['peopleEmailAddress'];
+        $firstName = $loggedUser['user']['peopleFirstName'];
+        $request = \Config\Services::Request();
+
+        $this->data2['language'] = \Config\Services::language()->getLocale();
+        $this->data2['peopleId'] = $userID;
+        $this->data2['mySpots'] = $this->database->getMySpotsTaken($userID);
+
+        $farmersMarketId = $request->getVar('farmersMarketID');
+        $dateOfActivity = $request->getVar('date');
+        $action = $request->getVar('action');
+
+        $farmersMarketName = $this->request->getPost('farmersMarketName');
+        $charityName = $this->request->getPost('charityName');
+        $time = $this->request->getPost('time');
+        $weekday = $this->request->getPost('weekday');
+        $meetingPoint = $this->request->getPost('meetingPoint');
+        $address = $this->request->getPost('address');
+
+
+
+        $hasSpotForDate = false;
+        foreach ($this->data2['mySpots'] as $spot) {
+            if ($spot->actionDate == $dateOfActivity) {
+                $hasSpotForDate = true;
+                break;
+            }
+        }
+
+        if ($farmersMarketId && $dateOfActivity) {
+                if ($action == 0 && !$hasSpotForDate) {
+                    if($farmersMarketName && $charityName && $time && $weekday && $meetingPoint && $address){
+                        $subject = "BOROUME: New Market Spot Selected";
+                        $body = "Dear $firstName,<br><br>";
+                        $body .= "The data of your selected spot is the following:<br><br>";
+                        $body .= "Name Market: $farmersMarketName<br>";
+                        $body .= "Meeting point: $meetingPoint, $address<br>";
+                        $body .= "Charity Name: $charityName<br>";
+                        $body .= "Date: $weekday<br>";
+                        $body .= "Time: $time<br>";
+                        // Send email
+                        $this->sendEmail($emailTo, $subject, $body);
+
+                        $this->database->pickSpotForAt($userID, $farmersMarketId, $dateOfActivity);
+                    }
+
+                } else if ($action == 1) {
+                    if($farmersMarketName && $charityName && $time && $weekday && $meetingPoint && $address){
+                        $subject = "BOROUME: Spot Cancelled";
+                        $body = "Dear $firstName,<br><br>";
+                        $body .= "The data of your canceled spot is the following:<br><br>";
+                        $body .= "Name Market: $farmersMarketName<br>";
+                        $body .= "Meeting point: $meetingPoint, $address<br>";
+                        $body .= "Charity Name: $charityName<br>";
+                        $body .= "Date: $weekday<br>";
+                        $body .= "Time: $time<br>";
+                        // Send email
+                        $this->sendEmail($emailTo, $subject, $body);
+
+                        $this->database->removeMySpot($userID, $farmersMarketId, $dateOfActivity);
+                    }
+                }
+            }
+
+            $this->data2['farmersMarketId'] = $farmersMarketId;
+            $this->data2['dateOfActivity'] = $dateOfActivity;
+
+            $this->data['content'] = view($view, $this->data2);
+
+            return view('template', $this->data);
+        }
+
+        private function sendEmail($to, $subject, $body) {
+            $email = \Config\Services::email();
+            $email->setFrom('typwindcontroller@gmail.com', 'Boroume Org');
+            $email->setTo($to);
+            $email->setSubject($subject);
+            $email->setMessage($body);
+
+            if (!$email->send()) {
+                return false;
+            }
+
+            return true;
+        }
+
+
 
 
     /* ORGANISATION*/
@@ -150,8 +246,32 @@ class BoroumeController extends BaseController {
     public function calendarOrg(){
         $this->set_common_data('Boroume', lang('Text.CalendarText'),'Start saving food' );
         $this->data['menu_items'] = $this->menu_model_org->get_menuitems(lang('Text.CalendarText'));
+        $view = 'calendarOrg';
+        $this->data2['farmersMarkets'] = $this->database->get_all_farmers_markets();
+        $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
+        $userID = $loggedUser['user']['peopleId'];
+        $request = \Config\Services::Request();
 
-        $this->data['content'] = view('calendarOrg');
+        $this->data2['language'] = \Config\Services::language()->getLocale();
+        $this->data2['peopleId'] = $userID;
+        $this->data2['spotsOver'] = true;
+
+        $farmersMarketId = $request->getVar('farmersMarketId');
+        $dateOfActivity = $request->getVar('date');
+
+        if($userID && $farmersMarketId && $dateOfActivity){
+            if($this->database->checkIfSpotsOver($farmersMarketId)){
+                $this->database->pickSpotForAt($userID, $farmersMarketId, $dateOfActivity);
+                $this->database->addSpotTaken($farmersMarketId);
+                $this->data2['spotsOver'] = true;
+            }else{
+                $this->data2['spotsOver'] = false;
+            }
+
+        }
+
+
+        $this->data['content'] = view($view, $this->data2);
 
         return view('template', $this->data);
     }
@@ -174,5 +294,34 @@ class BoroumeController extends BaseController {
         }
     }
 
+    public function calendarChangeForm(){
+        $this->data['title'] = 'Add Farmers Market';
+        $this->data['content'] = view("calendarChangeForm");
+        return view("calendarChangeForm");
+    }
+
+    public function addFarmersMarket(){
+        $name = $this->request->getPost('nameEnglish');
+        $nameGreek = $this->request->getPost('nameGreek');
+        $charityName = $this->request->getPost('charityNameEnglish');
+        $charityNameGreek = $this->request->getPost('charityNameGreek');
+        $dayOfTheWeek = $this->request->getPost('dayMarket');
+        $timeBegin = $this->request->getPost('timeStart');
+        $timeStop = $this->request->getPost('timeEnd');
+        $supermarket = $this->request->getPost('supermarket');
+        $supermarketLocEn = $this->request->getPost('meetingPointEnglish');
+        $supermarketLocGr = $this->request->getPost('meetingPointGreek');
+        $supermarketUrl = $this->request->getPost('meetingPointUrl');
+        $spotsMarket = $this->request->getPost('spotsMarket');
+
+        $result = $this->database->add_new_farmers_market($name, $nameGreek, $charityName, $charityNameGreek, $dayOfTheWeek, $timeBegin, $timeStop, $supermarket, $supermarketLocEn, $supermarketLocGr, $supermarketUrl, $spotsMarket);
+
+        if($result == 0 ){
+            return redirect()->to('BoroumeController/CalendarOrg')->with('fail', lang('Validation.failGeneral'));
+        }else{
+            return redirect()->to('BoroumeController/CalendarOrg')->with('success', lang('Validation.marketSuccess'));
+        }
+
+    }
 
 }

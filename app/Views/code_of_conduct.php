@@ -68,31 +68,31 @@
             <div style="display: flex">
                 <label for="farmersMarket">
                     <input type="checkbox" id="farmersMarket" name="programs[]" value="Boroume at the Farmers Market" <?= set_checkbox('programs', 'Boroume at the Farmers Market') ?>>
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-the-farmers-market/">Boroume at the Farmers Market</a>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-the-farmers-market/" target="_blank">Boroume at the Farmers Market</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="saveNFoodOffering">
                     <input type="checkbox" id="saveNFoodOffering" name="programs[]" value="Saving & Offering Food" <?= set_checkbox('programs', 'Saving & Offering Food') ?>>
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/saving-offering-food/">Saving & Offering Food</a>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/saving-offering-food/" target="_blank">Saving & Offering Food</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="everyMealMatters">
                     <input type="checkbox" id="everyMealMatters" name="programs[]" value='Awareness Program "Every meal matters"' <?= set_checkbox('programs', 'Awareness Program "Every meal matters"') ?>>
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/awareness-program-stop-food-waste/">Awareness Program "Every meal matters"</a>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/awareness-program-stop-food-waste/" target="_blank">Awareness Program "Every meal matters"</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="boroumeAtSchool">
                     <input type="checkbox" id="boroumeAtSchool" name="programs[]" value="Boroume At School" <?= set_checkbox('programs', 'Boroume At School') ?>>
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-school/">Boroume At School</a>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-at-school/" target="_blank">Boroume At School</a>
                 </label>
             </div>
             <div style="display: flex">
                 <label for="boroumeGleaning">
                     <input type="checkbox" id="boroumeGleaning" name="programs[]" value="Boroume Gleaning" <?= set_checkbox('programs', 'Boroume Gleaning') ?>>
-                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-gleaning/">Boroume Gleaning</a>
+                    <a href="https://www.boroume.gr/en/programmata/programs-detail/boroume-gleaning/" target="_blank">Boroume Gleaning</a>
                 </label>
             </div>
 
@@ -127,14 +127,16 @@
         <div id="code_of_conduct_div" style="margin: 15px;">
             <label for="code_of_conduct">
                 <li id="code_of_conduct">
-                    <a href="<?=base_url()?>AuthController/VolunteersGuideGeneral"><?= lang("Text.coc42")?></a></li>
+                    <a href="#" onclick="displayPopUpGeneralGuide(); return false;"><?= lang("Text.coc42")?></a>
+                </li>
             </label>
         </div>
 
         <div style="margin: 15px;">
             <label for="terms_of_service">
                 <li id="terms_of_service">
-                    <a href="<?=base_url()?>AuthController/VolunteersGuide"><?= lang("Text.coc43")?></a> </li>
+                    <a href="#" onclick="displayPopUpVolunteerGuide();  return false;"><?= lang("Text.coc43")?></a>
+                </li>
             </label>
         </div>
         <p><?= lang("Text.coc44")?>
@@ -169,4 +171,14 @@
     </form>
     </div>
     <div class="col-3"></div>
+</div>
+
+<div class="popup" id="popupGuide">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="container" id="defaultpopupthings1" style="width:fit-content">
+
+            </div>
+        </div>
+    </div>
 </div>

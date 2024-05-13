@@ -17,6 +17,7 @@ return [
     'regexPassword' => 'Passwords consist of at least 1 Uppercase, 1 Lowercase, 1 Number',
     'matchingPassword' => 'Passwords must match',
     'failGeneral' => 'Something went wrong',
+    'failGeneral2' => 'Something went wrong with the cookie',
     'incorrectPassword' => 'Password was incorrect',
     'loggedOff' => 'You are logged off',
     'alphaVolunteerPlace' => 'Residence should be only letters',
@@ -27,5 +28,6 @@ return [
     'regexSurname' => 'Surname should start with a capital and does only contain letters',
     'regexName' => 'Name should start with a capital and does only contain letters',
     'emailNotActive' => 'Your account is not activated yet. Please try again later.',
+    'marketSuccess' => 'Farmer\'s market was successfully added'
 
 ];

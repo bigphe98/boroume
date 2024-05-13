@@ -2,9 +2,16 @@
     <div class="row justify-content-center">
         <div class="col-3"></div>
         <div class="col-6 row justify-content-left">
-            <h1>Οδηγός Εθελοντή</h1>
+            <h3>Οδηγός Εθελοντή</h3>
         </div>
-        <div class="col-3"></div>
+        <div class="col-2"></div>
+        <div class="col-1">
+            <div class="smallroundbutton">
+                <span class="material-symbols-outlined" onclick="closePopUp()" style="cursor: pointer">
+    close
+</span>
+            </div>
+        </div>
     </div>
     <div class="row justify-content-center scrollable-container">
         <div class="col-3"></div>
@@ -46,13 +53,7 @@
             <p>Επίσης, φροντίζουμε η επισιτιστική στήριξη προς τους κοινωφελείς φορείς και τους
                 ωφελούμενους τους να γίνεται κατά τρόπο που διασφαλίζει την αξιοπρέπειά τους.</p>
 
-            <div class="col-5"></div>
-            <div class="col-2">
-                <button class="textbuttonsmall" onclick="location.href = '<?=base_url()?>AuthController/CodeOfConduct';">
-                    <?= lang("Text.vgEndButton")?>
-                </button>
-            </div>
-            <div class="col-5"></div>
+
 
 
 

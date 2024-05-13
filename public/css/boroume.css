@@ -293,10 +293,29 @@ canvas, #svg {
 
 /*sign up*/
 
-.signUpForm{
+.popup{
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 15px;
+    border-color: var(--brownFigma);
+    border-style: groove;
+    width: 750px;
+    height: 500px;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    transform: translate(0%,-40%)scale(1);
+    background-color: var(--whiteFigma);
+    padding-bottom: 10px;
+    display: none;
+    transition: transform 0.4s, top 0.4s;
 
 }
 
+.openpopup{
+    display: block;
+    top: 33vh;
+    transform: translate(0%,-40%)scale(1);
+}
 
 /*LOG IN NAVIGATION BAR*/
 #logo-div{
@@ -550,4 +569,11 @@ canvas, #svg {
 
 [id^=removeVolunteerButton1_]{
     background-color: var(--darkOrange);
+}
+
+/*Calendar*/
+
+#tableCalendar{
+    height: 50vh;
+    overflow-y: scroll;
 }

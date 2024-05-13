@@ -3,7 +3,15 @@
  * @var $farmersMarkets string
  * @var $language string
  * @var $userID int
+ * @var $dateOfActivity string
+ * @var $farmersMarketId int
+ * @var $spotsTaken string
+ * @var $mySpots string
+ * @var $selectedSpot string
  */
+$mySpotsIds = array_map(function($spot) {
+    return $spot->idFarmersMarket;
+}, $mySpots);
 
 // Define the function outside of the loop
 function getNextWeekdayDate($weekday) {
@@ -12,10 +20,15 @@ function getNextWeekdayDate($weekday) {
     $currentDay = date('N');
     $daysUntilNextWeekday = ($weekdayNumeric - $currentDay + 7) % 7;
     $nextWeekday = strtotime("+$daysUntilNextWeekday days");
-    return date('d/m', $nextWeekday);
+    return date('d/m/Y', $nextWeekday);
 }
 ?>
-
+<?php if (isset($requestData)): ?>
+    <div>
+        <h2>AJAX Request Data</h2>
+        <pre><?php print_r($requestData); ?></pre>
+    </div>
+<?php endif; ?>
 <div class="container-fluid">
     <div class="row">
 
@@ -31,25 +44,26 @@ function getNextWeekdayDate($weekday) {
             <div class="alert alert-success" id="alertpopup"><?= session()->getFlashdata('success'); ?></div>
         <?php endif ?>
 
+
         <div class="col-md-12" id="tableCalendar">
 
             <table class="table">
                 <thead>
                 <tr>
                     <th>
-                        Name Agora and Location
+                        NAME AGORA AND MEETING POINT
                     </th>
                     <th>
-                        Next Date
+                        NEXT DATE
                     </th>
                     <th>
-                        Time
+                        TIME
                     </th>
                     <th>
-                        Places
+                        SPOTS
                     </th>
                     <th>
-                        Activate
+                        PICK SPOT
                     </th>
                 </tr>
                 </thead>
@@ -60,7 +74,7 @@ function getNextWeekdayDate($weekday) {
                     <tr>
                         <td>
                             <div style="margin-left: 15px">
-                                <div class="row">
+                                <div class="row" id="farmersMarketName_<?=$market->idfarmersMarkets?>">
                                     <?php
                                     if ($language == 'gr') {
                                         echo $market->nameGreek;
@@ -70,7 +84,7 @@ function getNextWeekdayDate($weekday) {
                                     ?>
                                 </div>
                                 <div class="row">
-                                    <a href="<?=$market->superMarketMapsLink?>" target="_blank"><?php
+                                    <a id="location_<?=$market->idfarmersMarkets?>" href="<?=$market->superMarketMapsLink?>" target="_blank"><?php
                                         if ($language == 'gr') {
                                             echo $market->superMarketLocationGreek;
                                         } else {
@@ -78,27 +92,38 @@ function getNextWeekdayDate($weekday) {
                                         }
                                         ?></a>
                                 </div>
+                                <div class="row" id="charityName_<?=$market->idfarmersMarkets?>">
+                                   <?php
+                                        if ($language == 'gr') {
+                                            echo $market->charityNameGreek;
+                                        } else {
+                                            echo $market->charityName;
+                                        }
+                                        ?>
+                                </div>
                             </div>
 
 
                         </td>
-                        <td>
+                        <td id="weekday_<?=$market->idfarmersMarkets?>">
                             <?= lang("Weekdays." . $market->actionDay) ?> <?=getNextWeekdayDate($market->actionDay)?>
                         </td>
-                        <td>
+                        <td id="time_<?=$market->idfarmersMarkets?>">
                             <?= lang("Text.fromText")?> <?= substr($market->timeStart, 0, 5) ?><?= lang("Text.untilText")?> <?= substr($market->timeEnd, 0, 5) ?>
                         </td>
                         <td>
                             <?=$market->spotsTaken?> / <?=$market->spotsTotal?>
                         </td>
                         <td>
-                            <button type="button" class="btn textbutton">
-                                LOCK
-                            </button>
-
-                            <button type="button" class="btn secondarytextbutton">
-                                CHANGE INFO
-                            </button>
+                            <?php if (in_array($market->idfarmersMarkets, $mySpotsIds)): ?>
+                                <button type="button" class="btn textbutton" onclick="cancelSpotAtMarket(<?=$userID?>,<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>')">
+                                    CANCEL SPOT
+                                </button>
+                            <?php else: ?>
+                                <button type="button" class="btn textbutton" onclick="pickSpotAtMarket(<?=$userID?>,<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>' , <?=$market->spotsTaken?> , <?=$market->spotsTotal?>)">
+                                    PICK SPOT
+                                </button>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php
@@ -109,27 +134,7 @@ function getNextWeekdayDate($weekday) {
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-success" onclick="displayPopUpCalendar()">
-                        <?= lang("Text.addMarket")?>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <div class="popup" id="popupCalendar">

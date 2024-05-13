@@ -3,14 +3,21 @@
     <div class="row justify-content-center">
         <div class="col-3"></div>
         <div class="col-6 row justify-content-left">
-            <h1><?= lang("Text.volunteersGuideTitle")?></h1>
+            <h3><?= lang("Text.volunteersGuideTitle")?></h3>
         </div>
-        <div class="col-3"></div>
+        <div class="col-2"></div>
+        <div class="col-1">
+            <div class="roundbutton">
+                <span class="material-symbols-outlined" onclick="closePopUp()" style="cursor: pointer">
+    close
+</span>
+            </div>
+        </div>
     </div>
     <div class="row justify-content-center scrollable-container">
         <div class="col-3"></div>
         <div class="col-6 row justify-content-left">
-            <h2><?= lang("Text.volunteersGuideSubtitle")?></h2>
+            <h5><?= lang("Text.volunteersGuideSubtitle")?></h5>
             <p>
                 <b><?= lang("Text.vg0_0bold")?></b> <?= lang("Text.vg0_0")?>
             </p>
@@ -84,13 +91,6 @@
             </li>
             <li><b><?= lang("Text.vg5_6bold")?></b><?= lang("Text.vg5_6")?></li>
             <br>
-            <div class="col-5"></div>
-            <div class="col-2">
-                <button class="textbuttonsmall" onclick="location.href = '<?=base_url()?>AuthController/CodeOfConduct';">
-                    <?= lang("Text.vgEndButton")?>
-                </button>
-            </div>
-            <div class="col-5"></div>
         </div>
         <div class="col-3">
         </div>

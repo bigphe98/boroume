@@ -7,6 +7,8 @@ $(function () {
     } else {
         div.style.display = "block"; // Show the div
     }
+
+    let popup = document.getElementById("popupGuide")
 })
 
 function addService(){
@@ -14,4 +16,18 @@ function addService(){
     if(count < 3){
 
     }
+}
+
+function displayPopUpGeneralGuide() {
+    document.getElementById("popupGuide").classList.add("openpopup")
+    $('#defaultpopupthings1').load('volunteersGuideGeneral');
+}
+
+function displayPopUpVolunteerGuide() {
+    document.getElementById("popupGuide").classList.add("openpopup")
+    $('#defaultpopupthings1').load('volunteersGuide');
+}
+
+function closePopUp() {
+    document.getElementById("popupGuide").classList.remove("openpopup")
 }
