@@ -24,32 +24,7 @@ function updateSpotAtMarketAjax(farmersMarketId, dateOfActivity, update, farmers
     console.log(data);
 }
 
-function spotAtMarketEmailInfoAjax(farmersMarketName, charityName, weekday, time, meetingPoint, address) {
-    var data = {
-        farmersMarketName: farmersMarketName,
-        charityName: charityName,
-        time: time,
-        weekday: weekday,
-        meetingPoint: meetingPoint,
-        address: address
-    };
-
-    $.ajax({
-        url: "../BoroumeController/calendar",
-        type: "POST",
-        data: data,
-        dataType: 'json',
-        success: function(response){
-            $('.result').html(response);
-        }
-    });
-
-    console.log(data);
-
-}
-
-function pickSpotAtMarket(userID, farmersMarketId, dateOfActivity , spotsTaken, spotsTotal){
-    var userId = userID;
+function pickSpotAtMarket(farmersMarketId, dateOfActivity , spotsTaken, spotsTotal){
     console.log(spotsTotal)
     console.log(spotsTaken)
     if(spotsTaken < spotsTotal){
@@ -79,8 +54,7 @@ function pickSpotAtMarket(userID, farmersMarketId, dateOfActivity , spotsTaken, 
     }
 }
 
-function cancelSpotAtMarket(userID, farmersMarketId, dateOfActivity){
-    var userId = userID;
+function cancelSpotAtMarket(farmersMarketId, dateOfActivity){
     var farmersMarketName = document.getElementById("farmersMarketName_" + farmersMarketId).innerHTML.trim();
     var locationMarket = document.getElementById("location_" + farmersMarketId).innerHTML.trim();
     var charityName = document.getElementById("charityName_" + farmersMarketId).innerHTML.trim();
@@ -101,7 +75,7 @@ function cancelSpotAtMarket(userID, farmersMarketId, dateOfActivity){
 
     console.log(convertDateFormat(dateOfActivity))
     setTimeout(function() {
-        location.reload();
+       location.reload();
     }, 500);
 }
 

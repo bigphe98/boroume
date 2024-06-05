@@ -308,10 +308,36 @@ canvas, #svg {
     padding-bottom: 10px;
     display: none;
     transition: transform 0.4s, top 0.4s;
+    z-index: 3;
 
 }
 
 .openpopup{
+    display: block;
+    top: 33vh;
+    transform: translate(0%,-40%)scale(1);
+}
+
+.popupSmall{
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 15px;
+    border-color: var(--brownFigma);
+    border-style: groove;
+    width: 450px;
+    height: 300px;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    transform: translate(0%,-40%)scale(1);
+    background-color: var(--whiteFigma);
+    padding-bottom: 10px;
+    display: none;
+    transition: transform 0.4s, top 0.4s;
+    z-index: 5;
+
+}
+
+.openpopupSmall{
     display: block;
     top: 33vh;
     transform: translate(0%,-40%)scale(1);
@@ -565,6 +591,12 @@ canvas, #svg {
     overflow-y: scroll; /* Enable vertical scrollbar */
     border: 1px solid #ccc;
     height: 60vh;
+}
+
+.scrollable-popup-container{
+    overflow-y: scroll; /* Enable vertical scrollbar */
+    border: 1px solid #ccc;
+    height: 20vh;
 }
 
 [id^=removeVolunteerButton1_]{

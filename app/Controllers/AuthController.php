@@ -120,7 +120,7 @@ class AuthController extends BoroumeController
                     ],
                 ],
                 'password' => [
-                    'rules'  =>  'required|min_length[6]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
+                    'rules' => 'required|min_length[6]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=*_-])[a-zA-Z\d@#$%^&+=*_-]{6,}$/]',
                     'errors' => [
                         'required' => lang('Validation.Required'),
                         'min_length' => lang('Validation.minLengthPassword'),
@@ -223,7 +223,7 @@ class AuthController extends BoroumeController
                     ],
                 ],
                 'password' => [
-                    'rules'  =>  'required|min_length[6]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
+                    'rules' => 'required|min_length[6]|max_length[20]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=*_-])[a-zA-Z\d@#$%^&+=*_-]{6,}$/]',
                     'errors' => [
                         'required' => lang('Validation.Required'),
                         'min_length' => lang('Validation.minLengthPassword'),
@@ -403,7 +403,9 @@ class AuthController extends BoroumeController
             $new_pass = substr($shuffeled_token, 0, $password_length) . "A1a";
 
             $subject = "Boroume: Password recovery | Επανέκδοση Κωδικού ";
-            $body = "You can log in with your new password. Μπορείτε να συνδεθείτε με τον καινούριο κωδικό σας". "\r\n";
+            $body = "You can log in with your new password.". "<br><br>";
+            $body .= $new_pass. "<br><br>";
+            $body .= "Μπορείτε να συνδεθείτε με τον καινούριο κωδικό σας". "<br><br>";
             $body .= $new_pass;
 
 
@@ -447,10 +449,9 @@ class AuthController extends BoroumeController
         if($AFM == NULL && $DOY == NULL){
             $validation = $this->validate([
                 'volunteerPlace' => [
-                    'rules' => 'required|alpha|regex_match[/^[A-Z][A-Za-zΑ-Ωα-ω]*$/]',
+                    'rules' => 'required|regex_match[/^([A-ZΑ-Ω][a-zα-ω]*\s?|[A-ZΑ-Ω]+\s?)$/]',
                     'errors' => [
                         'required' => lang('Validation.Required'),
-                        'alpha' => lang('Validation.alphaVolunteerPlace'),
                         'regex_match' => lang('Validation.regexUpper'),
                     ],
                 ],
@@ -471,10 +472,9 @@ class AuthController extends BoroumeController
         }else{
             $validation = $this->validate([
                 'volunteerPlace' => [
-                    'rules' => 'required|alpha|regex_match[/^[A-Za-zΑ-Ωα-ω][A-Za-zΑ-Ωα-ω]*$/]',
+                    'rules' => 'required|regex_match[/^([A-ZΑ-Ω][a-zα-ω]*\s?|[A-ZΑ-Ω]+\s?)$/]',
                     'errors' => [
                         'required' => lang('Validation.Required'),
-                        'alpha' => lang('Validation.alphaVolunteerPlace'),
                         'regex_match' => lang('Validation.regexUpper'),
                     ],
                 ],
@@ -508,7 +508,7 @@ class AuthController extends BoroumeController
 
         if(!$validation){
             return redirect()->to('AuthController/privateAgreement')->with('validation', $this->validator)->withInput();
-        }else{
+        }else {
             $loggedUser = json_decode($_COOKIE['LoggedUser'], true);
             $email = $loggedUser['email'] ?? null;
             $password = $loggedUser['password'] ?? null;
@@ -522,8 +522,15 @@ class AuthController extends BoroumeController
             $DOY = $this->request->getPost('volunteerDOY');
             $programs = $this->request->getPost('programs');
             $medicalInstitute = $this->request->getPost('volunteerHosp');
+            $termType = $this->request->getPost('term_type');
+            if ($termType == 'indefinite') {
+                $endTerm = null;
+            } else {
+                $endTerm = $this->request->getPost('end_date');
+            }
+            $videoConsent = $this->request->getPost('videoConsent') ? 1 : 0;
 
-            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, NULL);
+            $result = $this->database->make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, $endTerm, $videoConsent);
             if ($result == 0) {
                 return redirect()->to('AuthController/SignUp')->with('fail', lang('Validation.failGeneral'));
             } else {
@@ -553,7 +560,7 @@ class AuthController extends BoroumeController
                     $subject = "ΝΕΟΣ ΕΘΕΛΟΝΤΗΣ";
                     $body = "Η/Ο " . "\r\n";
                     $body .= $firstName;
-                    $body .= " έγινε μέλος." . "\r\n";
+                    $body .= " έγινε μέλος." . "<br><br>";
                     $body .= " Αυτό είναι το email της/του: " . $email;
 
 
@@ -636,7 +643,7 @@ class AuthController extends BoroumeController
                     $subject = "ΝΕΟΣ ΕΘΕΛΟΝΤΗΣ";
                     $body = "Η/Ο " . "\r\n";
                     $body .= $firstName;
-                    $body .= " έγινε μέλος." . "\r\n";
+                    $body .= " έγινε μέλος." . "<br><br>";
                     $body .= " Αυτό είναι το email της/του: " . $email;
 
 

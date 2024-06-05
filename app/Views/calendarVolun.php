@@ -23,12 +23,7 @@ function getNextWeekdayDate($weekday) {
     return date('d/m/Y', $nextWeekday);
 }
 ?>
-<?php if (isset($requestData)): ?>
-    <div>
-        <h2>AJAX Request Data</h2>
-        <pre><?php print_r($requestData); ?></pre>
-    </div>
-<?php endif; ?>
+
 <div class="container-fluid">
     <div class="row">
 
@@ -116,11 +111,11 @@ function getNextWeekdayDate($weekday) {
                         </td>
                         <td>
                             <?php if (in_array($market->idfarmersMarkets, $mySpotsIds)): ?>
-                                <button type="button" class="btn textbutton" onclick="cancelSpotAtMarket(<?=$userID?>,<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>')">
+                                <button type="button" class="btn textbutton" onclick="cancelSpotAtMarket(<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>')">
                                     CANCEL SPOT
                                 </button>
                             <?php else: ?>
-                                <button type="button" class="btn textbutton" onclick="pickSpotAtMarket(<?=$userID?>,<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>' , <?=$market->spotsTaken?> , <?=$market->spotsTotal?>)">
+                                <button type="button" class="btn textbutton" onclick="pickSpotAtMarket(<?=$market->idfarmersMarkets?>, '<?=getNextWeekdayDate($market->actionDay)?>' , <?=$market->spotsTaken?> , <?=$market->spotsTotal?>)">
                                     PICK SPOT
                                 </button>
                             <?php endif; ?>

@@ -74,8 +74,10 @@ agreement a legal obligation or a legal right. It is expressly agreed that given
 the Company is not obliged to pay any social security contributions or other compensation. ',
     'coc3Title' => '3. TERM:',
     'coc31' => 'The duration of this contract commences on ',
-    'coc32' => ' and it is agreed that it will last for an
-indefinite period. Since this agreement has been drawn up for reasons of moral duty and does not create legal
+    'coc32' => ' and it is agreed that it will last ',
+    'coc32Indefinite' => 'indefinite',
+    'coc32SpecificDate' => 'untill ',
+    'coc33' => 'Since this agreement has been drawn up for reasons of moral duty and does not create legal
 obligations and legal rights, it may be terminated at any time by any of the contracting parties. The Company will
 advise the volunteer if necessary to cease the provision of services and the volunteer may at any time discontinue
 providing services to the Company by simple notification to the Company. ',
@@ -108,6 +110,7 @@ or reproduction(s) of me, and/or recording of my voice, in part or in whole, it 
 magazines and other print media, on television, radio and electronic media (including the Internet) and/or in
 mailings for promotional, educational and awareness.',
     'coc55' => 'The consent is given in perpetuity, free of any claims or financial demands and does not require prior approval by me.',
+    'coc56' => 'I don\'t agree to the Video Consent and Release Form',
     'coc6Title' => '6. FINAL PROVISIONS:',
     'coc61' => '6.1 This Agreement is governed by Greek law and any dispute relating to the interpretation of this Agreement is
 resolved by the courts of Athens, which are solely responsible for resolving the disputes arising out of it.',

@@ -7,7 +7,7 @@
         <div class="col-2"></div>
         <div class="col-1">
             <div class="smallroundbutton">
-                <span class="material-symbols-outlined" onclick="closePopUp()" style="cursor: pointer">
+                <span class="material-symbols-outlined" onclick="closePopUp(1)" style="cursor: pointer">
                 close
                 </span>
             </div>
@@ -106,7 +106,7 @@
                     <small class="text-danger"><?= display_error(session('validation'), 'email') ?></small>
                 <?php endif ?>
                 <div style="display: flex; align-items: center;">
-                    <label for="supermarket" style="width: 100px;"> Supermarket </label>
+                    <label for="supermarket" style="width: 100px;"> Meeting Point </label>
                     <input id="supermarket" style="font-family: 'Canada', sans-serif; width: 300px; margin-left: 10px;" type="text" name="supermarket" class="form-control" placeholder="" value="" autocomplete="off">
                 </div>
             </div>

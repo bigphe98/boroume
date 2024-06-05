@@ -18,10 +18,10 @@ class Database_Model
         return $query->getRow()->result;
     }
 
-    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, $endTerm){
-        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
+    public function make_temp_account($email, $password, $firstName, $lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, $endTerm, $videoConsent){
+        $query_text = 'CALL add_account(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'; // this procedure in the db only adds account if the email is not already taken
 
-        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, $endTerm));
+        $query = $this->db->query($query_text, array($email,$password,$firstName,$lastName, $telephone, $location, $residentOf, $AFM, $DOY, $medicalInstitute, $endTerm, $videoConsent));
         return $query->getRow()->result;
     }
 
@@ -70,7 +70,13 @@ class Database_Model
     }
 
     public function get_all_farmers_markets(){
-        $query_text = 'SELECT idfarmersMarkets, name, nameGreek, charityName,charityNameGreek, actionDay, timeStart, timeEnd, meetingPoint, superMarketLocation, superMarketLocationGreek,  superMarketMapsLink, spotsTaken, spotsTotal  FROM a23PhaedonLomis.spotsTakenPerMarket';
+        $query_text = 'SELECT idfarmersMarkets, name, nameGreek, charityName,charityNameGreek, actionDay, timeStart, timeEnd, meetingPoint, superMarketLocation, superMarketLocationGreek,  superMarketMapsLink, spotsTaken, spotsTotal, isLocked  FROM a23PhaedonLomis.spotsTakenPerMarket ORDER BY FIELD(actionDay, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");';
+        $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
+
+    public function get_all_farmers_markets_open(){
+        $query_text = 'SELECT idfarmersMarkets, name, nameGreek, charityName,charityNameGreek, actionDay, timeStart, timeEnd, meetingPoint, superMarketLocation, superMarketLocationGreek,  superMarketMapsLink, spotsTaken, spotsTotal, isLocked  FROM a23PhaedonLomis.spotsTakenPerMarket WHERE isLocked = "0" ORDER BY FIELD(actionDay, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");';
         $query = $this->db->query($query_text);
         return $query->getResult();
     }
@@ -91,7 +97,7 @@ class Database_Model
     }
 
     public function addSpotTaken($marketID){
-        $query_text = 'UPDATE farmersMarketsAthens SET spotsTaken = spotsTaken + 1 WHERE idfarmersMarkets = ?';
+        $query_text = 'UPDATE farmersMarkets SET spotsTaken = spotsTaken + 1 WHERE idfarmersMarkets = ?';
         $this->db->query($query_text, array($marketID));
 
         // Check if the UPDATE operation was successful
@@ -106,7 +112,7 @@ class Database_Model
     }
 
     public function getSelectedFarmersMarket($farmersMarketID){
-        $query_text = 'SELECT idFarmersMarket, name, nameGreek, charityName, charityNameGreek, actionDate, timeStart, timeEnd, meetingPoint, superMarketLocation, superMarketLocationGreek, superMarketMapsLink FROM farmersMarketsAthens WHERE idFarmersMarkets = ?';
+        $query_text = 'SELECT idFarmersMarket, name, nameGreek, charityName, charityNameGreek, actionDate, timeStart, timeEnd, meetingPoint, superMarketLocation, superMarketLocationGreek, superMarketMapsLink FROM farmersMarkets WHERE idFarmersMarkets = ?';
         $query = $this->db->query($query_text, array($farmersMarketID));
         return $query->getResult();
     }
@@ -124,6 +130,66 @@ class Database_Model
         return $query->getResult();
     }
 
+    public function getAllSpotsFromAllMarkets(){
+        $query_text = 'SELECT peopleId, farmersMarketId, firstName, lastName, email, telephone, actionDate FROM a23PhaedonLomis.peopleReservedSpotsWithName';
+        $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
+
+    public function lockMarket($idMarket){
+        $query_text = 'UPDATE a23PhaedonLomis.farmersMarkets SET isLocked = "1" WHERE idfarmersMarkets = ?';
+
+        $this->db->query($query_text, array($idMarket));
+
+    }
+
+    public function unlockMarket($idMarket){
+        $query_text = 'UPDATE a23PhaedonLomis.farmersMarkets SET isLocked = "0" WHERE idfarmersMarkets = ?';
+        $query = $this->db->query($query_text, array($idMarket));
+        return $query->getResult();
+    }
+
+    public function updateMarketInfo($farmersMarketId,$farmersMarketNameGreek, $farmersMarketNameEnglish, $charityNameEnglish, $charityNameGreek, $weekday, $timeStart, $timeEnd, $meetingPoint, $meetingPointEnglish, $meetingPointGreek, $meetingPointUrl, $spotsMarket)
+    {
+        $query_text = 'UPDATE a23PhaedonLomis.farmersMarkets SET nameGreek = ?, name = ?, charityName = ?, charityNameGreek = ?, actionDay = ?, timeStart = ?, timeEnd = ?, meetingPoint = ?, superMarketLocation = ?, superMarketLocationGreek = ?, superMarketMapsLink = ?, spotsTotal = ? WHERE idfarmersMarkets = ?';
+        $query = $this->db->query($query_text, array($farmersMarketNameGreek, $farmersMarketNameEnglish, $charityNameEnglish, $charityNameGreek, $weekday, $timeStart, $timeEnd, $meetingPoint, $meetingPointEnglish, $meetingPointGreek, $meetingPointUrl, $spotsMarket, $farmersMarketId));
+        log_message('debug', 'Query: ' . $this->db->getLastQuery());
+        return $query->getResult();
+    }
+
+    public function removePersonFromMarket($farmersMarketId, $personID)
+    {
+        $query_text = 'DELETE FROM a23PhaedonLomis.peopleReservedSpot WHERE idFarmersMarket = ? AND idPeople = ?';
+        $query = $this->db->query($query_text, array($farmersMarketId, $personID));
+        return $query->getResult();
+    }
+
+    public function addPersonToMarket($farmersMarketId, $personID, $actionDate)
+    {
+        $query_text = 'INSERT INTO a23PhaedonLomis.peopleReservedSpot (idPeople, idFarmersMarket, actionDate) VALUES (?, ?, ?);';
+        $query = $this->db->query($query_text, array($personID, $farmersMarketId, $actionDate));
+
+        return $query->getResult();
+    }
+
+
+    //saving food
+    public function changeMeasuringData($foodname, $kafasi, $sakoula){
+        $query_text = 'INSERT INTO a23PhaedonLomis.foodMeasurements (foodName, kgPerKafasi, kgPerSakoula) VALUES (?, ?, ?);';
+        $query = $this->db->query($query_text, array($foodname, $kafasi, $sakoula));
+        if ($query === false) {
+            // The query failed, handle the error here
+            // For example, you could throw an exception or return false
+            throw new Exception('Database query failed');
+        }
+        return $this->db->affectedRows() > 0;
+    }
+
+    public function getAllFoodMeasuringData(){
+        $query_text = 'SELECT idFoodMeasurements, foodName, kgPerKafasi, kgPerSakoula from a23PhaedonLomis.foodMeasurements';
+        $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
 
 
 }

@@ -18,6 +18,10 @@ function addService(){
     }
 }
 
+function toggleDateInput(enable) {
+    document.getElementById('end_date').disabled = !enable;
+}
+
 function displayPopUpGeneralGuide() {
     document.getElementById("popupGuide").classList.add("openpopup")
     $('#defaultpopupthings1').load('volunteersGuideGeneral');

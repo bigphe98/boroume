@@ -70,7 +70,7 @@ class BoroumeController extends BaseController {
         $this->data['menu_items'] = $this->menu_model->get_menuitems(lang('Text.CalendarText'));
         $view = 'calendarVolun';
 
-        $this->data2['farmersMarkets'] = $this->database->get_all_farmers_markets();
+        $this->data2['farmersMarkets'] = $this->database->get_all_farmers_markets_open();
 
         $requestData = $this->request->getPost();
         log_message('debug', 'AJAX Request Data: ' . json_encode($requestData));
@@ -125,6 +125,17 @@ class BoroumeController extends BaseController {
                         // Send email
                         $this->sendEmail($emailTo, $subject, $body);
 
+                        $subject2 = "Ο/Η $firstName ΠΑΕΙ ΣΕ ΔΡΑΣΗ: $farmersMarketName";
+                        $body2 = "Ο/Η $firstName,<br><br>";
+                        $body2 .= "Έκλεισε θέση στην παρακάτω λαϊκή:<br><br>";
+                        $body2 .= "Λαική: $farmersMarketName<br>";
+                        $body2 .= "Σημείο συνάντησης ομάδας: $meetingPoint, $address<br>";
+                        $body2 .= "Κοινωφελής φορέας: $charityName<br>";
+                        $body2 .= "Ημερομηνεία: $weekday<br>";
+                        $body2 .= "Ώρα συνάντησης: $time<br>";
+                        // Send email
+                        $this->sendEmail('plomis888@gmail.com', $subject2, $body2);
+
                         $this->database->pickSpotForAt($userID, $farmersMarketId, $dateOfActivity);
                     }
 
@@ -140,6 +151,18 @@ class BoroumeController extends BaseController {
                         $body .= "Time: $time<br>";
                         // Send email
                         $this->sendEmail($emailTo, $subject, $body);
+
+                        $subject2 = "Ο/Η $firstName ΑΚΥΡΩΣΕ ΤΗΝ ΔΡΑΣΗ: $farmersMarketName";
+                        $body2 = "Ο/Η $firstName,<br><br>";
+                        $body2 .= "Ακύρωσε τη δράση στην παρακάτω λαϊκή:<br><br>";
+                        $body2 .= "Λαική: $farmersMarketName<br>";
+                        $body2 .= "Σημείο συνάντησης ομάδας: $meetingPoint, $address<br>";
+                        $body2 .= "Κοινωφελής φορέας: $charityName<br>";
+                        $body2 .= "Ημερομηνεία: $weekday<br>";
+                        $body2 .= "Ώρα συνάντησης: $time<br>";
+
+                        // Send email
+                        $this->sendEmail('plomis888@gmail.com', $subject2, $body2);
 
                         $this->database->removeMySpot($userID, $farmersMarketId, $dateOfActivity);
                     }
@@ -226,13 +249,35 @@ class BoroumeController extends BaseController {
     }
 
     public function savingfood(){
-        $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'Start saving food' );
-        $this->data['content'] = 'Here comes content';
+        $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'What do you want to do?' );
+
+        $view = 'savingFood';
 
         $this->data['menu_items'] = $this->menu_model_org->get_menuitems(lang('Text.SaveFoodText'));
-
+        $this->data['content'] = view($view);
         return view('template', $this->data);
     }
+
+    public function changeMeasuringInfo(){
+        $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'Change Measurement Information' );
+        $view = 'measurementInformationChange';
+
+        $foodName = $this->request->getVar('foodName');
+        $kgsPerBag = $this->request->getVar('bagWeight');
+        $kgsPerBox = $this->request->getVar('boxWeight');
+
+        if($foodName && $kgsPerBag && $kgsPerBox){
+            if($this->database->changeMeasuringData($foodName,$kgsPerBox, $kgsPerBag))
+                return redirect()->to('/BoroumeController/changeMeasuringInfo'); // Redirect to the same method
+        }
+
+        $this->data2['food_data'] = $this->database->getAllFoodMeasuringData();
+
+        $this->data['menu_items'] = $this->menu_model_org->get_menuitems(lang('Text.SaveFoodText'));
+        $this->data['content'] = view($view, $this->data2);
+        return view('template', $this->data);
+    }
+
 
     public function announcementsOrg(){
         $this->set_common_data('Boroume', lang('Text.AnnouncementsText'),'Start saving food' );
@@ -256,19 +301,44 @@ class BoroumeController extends BaseController {
         $this->data2['peopleId'] = $userID;
         $this->data2['spotsOver'] = true;
 
+        $this->data2['spotsSelected'] = $this->database->getAllSpotsFromAllMarkets();
+        $this->data2['volunteers'] = $this->database->get_people_registered();
+
+        $action = $request->getPost('action');
         $farmersMarketId = $request->getVar('farmersMarketId');
-        $dateOfActivity = $request->getVar('date');
+        $farmersMarketNameGreek = $request->getVar('farmersMarketNameGreek');
+        $farmersMarketNameEnglish = $request->getVar('farmersMarketNameEnglish');
+        $charityNameGreek = $request->getVar('charityNameGreek');
+        $charityNameEnglish = $request->getVar('charityNameEnglish');
+        $weekday = $request->getVar('weekday');
+        $timeStart = $request->getVar('timeStart');
+        $timeEnd = $request->getVar('timeEnd');
+        $meetingPoint = $request->getVar('meetingPoint');
+        $meetingPointEnglish = $request->getVar('meetingPointEnglish');
+        $meetingPointGreek = $request->getVar('meetingPointGreek');
+        $meetingPointUrl = $request->getVar('meetingPointUrl');
+        $spotsMarket = $request->getVar('spotsMarket');
+        $personID = $request->getVar('peopleId');
+        $date = $request->getVar('actionDay');
 
-        if($userID && $farmersMarketId && $dateOfActivity){
-            if($this->database->checkIfSpotsOver($farmersMarketId)){
-                $this->database->pickSpotForAt($userID, $farmersMarketId, $dateOfActivity);
-                $this->database->addSpotTaken($farmersMarketId);
-                $this->data2['spotsOver'] = true;
-            }else{
-                $this->data2['spotsOver'] = false;
-            }
+        $this->data2['actionClicked'] = 0;
 
-        }
+
+
+           if ($action === 'lock') {
+                $this->database->lockMarket($farmersMarketId);
+           } else if ($action === 'unlock') {
+                $this->database->unlockMarket($farmersMarketId);
+           } else if($action === 'update'){
+               log_message('debug', 'Update Action: ' . json_encode($_POST));
+               $this->database->updateMarketInfo($farmersMarketId, $farmersMarketNameGreek, $farmersMarketNameEnglish, $charityNameGreek, $charityNameEnglish,
+                    $weekday, $timeStart, $timeEnd, $meetingPoint, $meetingPointEnglish, $meetingPointGreek, $meetingPointUrl, $spotsMarket);
+           } else if($action === 'remove'){
+               $this->database->removePersonFromMarket($farmersMarketId, $personID);
+           } else if($action === 'add'){
+               $this->database->addPersonToMarket($farmersMarketId, $personID, $date);
+           }
+
 
 
         $this->data['content'] = view($view, $this->data2);

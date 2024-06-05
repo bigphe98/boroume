@@ -121,7 +121,18 @@
             $currentDate = date('d-m-Y');
             echo $currentDate;
             ?>
-            <?= lang("Text.coc32")?></p>
+            <?= lang("Text.coc32")?>
+            <br>
+            <input type="radio" id="indefinite" name="term_type" value="indefinite" onclick="toggleDateInput(false)" checked>
+            <label for="indefinite"><?= lang("Text.coc32Indefinite")?></label>
+            <br>
+            <input type="radio" id="specific_date" name="term_type" value="specific_date" onclick="toggleDateInput(true)">
+            <label for="specific_date"><?= lang("Text.coc32SpecificDate")?></label> <input type="date" id="end_date" name="end_date" disabled>
+            <?php if(session()->has('validation')): ?>
+                <small class="text-danger"><?= display_error(session('validation'), 'endTerm') ?></small>
+            <?php endif ?>
+            .<br>
+            <?= lang("Text.coc33")?></p>
         <h3><?= lang("Text.coc4Title")?></h3>
         <p><?= lang("Text.coc41")?></p>
         <div id="code_of_conduct_div" style="margin: 15px;">
@@ -153,6 +164,10 @@
             <li><?= lang("Text.coc54")?></li>
         </div>
         <?= lang("Text.coc55")?>
+        <br><br>
+        <label for="videoConsent">
+            <input type="checkbox" id="videoConsent" name="videoConsent" value="1"> <?= lang("Text.coc56")?>
+        </label>
         </p>
         <h3><?= lang("Text.coc6Title")?></h3>
         <div><p><?= lang("Text.coc61")?></p>
