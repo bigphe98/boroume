@@ -21,6 +21,7 @@
 
     <script src="<?= base_url()?>/public/js/peopleManagement.js"></script>
     <script src="<?= base_url()?>/public/js/general.js"></script>
+    <script src="<?= base_url()?>/public/js/saveFood.js"></script>
 </head>
 
 <body>

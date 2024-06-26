@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-2">
 
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="window.location.href='<?= base_url()?>BoroumeController/addActivityData'">
                             Go
                         </button>
                     </div>

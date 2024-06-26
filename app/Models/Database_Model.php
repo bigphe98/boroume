@@ -185,9 +185,31 @@ class Database_Model
         return $this->db->affectedRows() > 0;
     }
 
+    public function confirmChangedMeasuringData($foodname, $kafasi, $sakoula, $id) {
+        $query_text = 'UPDATE a23PhaedonLomis.foodMeasurements SET foodName = ?, kgPerKafasi = ?, kgPerSakoula = ? WHERE idFoodMeasurements = ?;';
+        $query = $this->db->query($query_text, array($foodname, $kafasi, $sakoula, $id));
+        if ($query === false) {
+            throw new Exception('Database query failed');
+        }
+        return $this->db->affectedRows() > 0;
+    }
+
+
     public function getAllFoodMeasuringData(){
         $query_text = 'SELECT idFoodMeasurements, foodName, kgPerKafasi, kgPerSakoula from a23PhaedonLomis.foodMeasurements';
         $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
+
+    public function getAllPastActions(){
+        $query_text = 'SELECT actionDate, idFarmersMarket, spotsTaken, nameGreek, charityNameGreek, actionId FROM a23PhaedonLomis.non_saved_actions;';
+        $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
+
+    public function getInfoOfPeopleAtMarketOnDate($nameMarket, $actionDate){
+        $query_text = 'SELECT firstName, lastName, email FROM a23PhaedonLomis.pastActivitiesWithName WHERE farmersMarketName = ? AND actionDate = ?;';
+        $query = $this->db->query($query_text, array($nameMarket, $actionDate));
         return $query->getResult();
     }
 

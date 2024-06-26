@@ -23,6 +23,7 @@
     <script src="<?= base_url()?>/public/js/general.js"></script>
     <script src="<?= base_url()?>/public/js/calendar.js"></script>
     <script src="<?= base_url()?>/public/js/calendarVolunteers.js"></script>
+    <script src="<?= base_url()?>/public/js/saveFood.js"></script>
 </head>
 
 <body>

@@ -258,6 +258,42 @@ class BoroumeController extends BaseController {
         return view('template', $this->data);
     }
 
+    public function addActivityData(){
+        $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'Add activity information' );
+
+        $view = 'addActivityData';
+
+        $this->data2['non_saved_past_activities'] = $this->database->getAllPastActions();
+
+        $this->data['menu_items'] = $this->menu_model_org->get_menuitems(lang('Text.SaveFoodText'));
+        $this->data['content'] = view($view, $this->data2);
+        return view('template', $this->data);
+    }
+
+    public function confirmActivityData(){
+        $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'Confirm activity information' );
+
+        $view = 'confirmActivityInformation';
+
+        // Retrieve the parameters from the request
+        $actionDate = $this->request->getGet('actionDate');
+        $farmersMarket = $this->request->getGet('farmersMarket');
+
+        // Load past activities
+        $this->data2['non_saved_past_activities'] = $this->database->getAllPastActions();
+
+        // Add the retrieved parameters to the data array
+        $this->data2['actionDate'] = $actionDate;
+        $this->data2['farmersMarket'] = $farmersMarket;
+
+        $this->data2['peopleWentToMarket'] = $this->database->getInfoOfPeopleAtMarketOnDate($farmersMarket, $actionDate);
+        $this->data2['foodInfo'] = $this->database->getAllFoodMeasuringData();
+
+        $this->data['menu_items'] = $this->menu_model_org->get_menuitems(lang('Text.SaveFoodText'));
+        $this->data['content'] = view($view, $this->data2);
+        return view('template', $this->data);
+    }
+
     public function changeMeasuringInfo(){
         $this->set_common_data('Boroume', lang('Text.SaveFoodText'),'Change Measurement Information' );
         $view = 'measurementInformationChange';
@@ -270,6 +306,18 @@ class BoroumeController extends BaseController {
             if($this->database->changeMeasuringData($foodName,$kgsPerBox, $kgsPerBag))
                 return redirect()->to('/BoroumeController/changeMeasuringInfo'); // Redirect to the same method
         }
+
+        $nameFood = $this->request->getVar('nameFood');
+        $kgBox = $this->request->getVar('kgBox');
+        $kgBag = $this->request->getVar('kgBag');
+        $idMeasurement = $this->request->getVar('idMeasurement');
+
+        if ($nameFood && $kgBox && $kgBag && $idMeasurement) {
+            if ($this->database->confirmChangedMeasuringData($nameFood, $kgBox, $kgBag, $idMeasurement)) {
+                return redirect()->to('/BoroumeController/changeMeasuringInfo'); // Redirect to the same method
+            }
+        }
+
 
         $this->data2['food_data'] = $this->database->getAllFoodMeasuringData();
 

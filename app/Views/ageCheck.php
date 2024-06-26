@@ -24,7 +24,7 @@ keyboard_tab
         <div class="col-md-4">
             <div class="jumbotron">
                 <h2>
-                    Sign up for children
+                    Sign up for minors
                 </h2>
                 <p>
                     If you are still a child, please use this button and create an account with the help of a parent/guardian.

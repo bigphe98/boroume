@@ -55,18 +55,32 @@
                 <tbody>
                 <?php foreach($food_data as $data): ?>
                     <tr id="spotSelectedRow">
-                        <td id="foodName_<?php $data->idFoodMeasurements ?>">
-                            <?= $data->foodName; ?>
+                        <td id="foodName_<?= $data->idFoodMeasurements ?>">
+                            <p id="pFoodName_<?= $data->idFoodMeasurements ?>" style="display: block"><?= $data->foodName; ?></p>
+
+                            <input id="inputFoodName_<?= $data->idFoodMeasurements ?>" style="display: none" value="<?= $data->foodName ?>">
                         </td>
-                        <td id="kgBox_<?php $data->idFoodMeasurements ?>">
-                            <?=$data->kgPerKafasi; ?>
+                        <td id="kgBox_<?= $data->idFoodMeasurements ?>">
+
+                            <p id="pkgBox_<?= $data->idFoodMeasurements ?>" style="display: block"><?=$data->kgPerKafasi; ?></p>
+
+                            <input id="inputkgBox_<?= $data->idFoodMeasurements ?>" style="display: none" value="<?=$data->kgPerKafasi; ?>">
                         </td>
-                        <td id="kgBag_<?php $data->idFoodMeasurements ?>">
-                            <?=$data->kgPerSakoula; ?>
+                        <td id="kgBag_<?= $data->idFoodMeasurements ?>">
+                            <p id="pkgBag_<?= $data->idFoodMeasurements ?>" style="display: block"><?=$data->kgPerSakoula; ?></p>
+
+                            <input id="inputkgBag_<?= $data->idFoodMeasurements ?>" style="display: none" value="<?=$data->kgPerSakoula; ?>">
+
                         </td>
-                        <td id="foodButton_<?php $data->idFoodMeasurements ?>">
-                            <button onclick="changeInfo()">
+                        <td id="foodButton_<?= $data->idFoodMeasurements ?>">
+                            <button id="changeButton_<?= $data->idFoodMeasurements ?>" style="display: block" onclick="changeInfo('change', <?= $data->idFoodMeasurements ?>)">
                                 Change
+                            </button>
+                            <button id="cancelButton_<?= $data->idFoodMeasurements ?>" style="display: none" onclick="changeInfo('cancel', <?= $data->idFoodMeasurements ?>)">
+                                Cancel
+                            </button>
+                            <button id="confirmButton_<?= $data->idFoodMeasurements ?>" style="display: none" onclick="changeInfo('confirm', <?= $data->idFoodMeasurements ?>)">
+                                Confirm
                             </button>
                         </td>
                     </tr>
